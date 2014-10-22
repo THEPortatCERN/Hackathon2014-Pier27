@@ -4,5 +4,6 @@
     <string name="app_name">Levon</string>
     <string name="btn_listen">Listen</string>
     <string name="btn_send">Send</string>
+    <string name="action_settings">Settings</string>
 
 </resources>
