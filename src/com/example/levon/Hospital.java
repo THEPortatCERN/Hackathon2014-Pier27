@@ -9,11 +9,13 @@ public class Hospital {
 	
 	public static byte[] getMessage()
 	{
+		// TODO: define message format and add proper message here
 		return "message".getBytes();
 	}
 
 	public static byte[] getSignature()
 	{
+		// TODO: sign message and return proper signature
 		return "signatue".getBytes();
 	}
 }

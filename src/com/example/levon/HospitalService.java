@@ -30,7 +30,7 @@ public class HospitalService {
 	}
 
 	public void start() {
-		BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
+		adapter = BluetoothAdapter.getDefaultAdapter();
 
 		if (adapter == null)
 			log("ERROR: no bluetooth adapter found");
