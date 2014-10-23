@@ -146,4 +146,25 @@ public class MainActivity extends Activity {
 		
 		new AcceptThread().run();
 	}
+    
+    private void hospitalRole(View view)
+    {
+    	Intent intent = new Intent(this, HospitalActivity.class);
+    	startActivity(intent);
+    }
+    private void helicopterRole(View view)
+    {
+    	Intent intent = new Intent(this, HelicopterActivity.class);
+    	startActivity(intent);
+    }
+    private void ambulanceRole(View view)
+    {
+    	Intent intent = new Intent(this, AmbulanceActivity.class);
+    	startActivity(intent);
+    }
+    private void checkpointRole(View view)
+    {
+    	Intent intent = new Intent(this, CheckpointActivity.class);
+    	startActivity(intent);
+    }
 }

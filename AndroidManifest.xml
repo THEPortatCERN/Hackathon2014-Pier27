@@ -8,9 +8,9 @@
         android:minSdkVersion="10"
         android:targetSdkVersion="21" />
 
-	<uses-permission android:name="android.permission.BLUETOOTH" />
-	<uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
- 
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -24,6 +24,38 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".HospitalActivity"
+            android:label="@string/title_activity_hospital"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.levon.MainActivity" />
+        </activity>
+        <activity
+            android:name=".AmbulanceActivity"
+            android:label="@string/title_activity_ambulance"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.levon.MainActivity" />
+        </activity>
+        <activity
+            android:name=".CheckpointActivity"
+            android:label="@string/title_activity_checkpoint"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.levon.MainActivity" />
+        </activity>
+        <activity
+            android:name=".HelicopterActivity"
+            android:label="@string/title_activity_helicopter"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.levon.MainActivity" />
         </activity>
     </application>
 

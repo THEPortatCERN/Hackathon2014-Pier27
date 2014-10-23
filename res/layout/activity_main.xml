@@ -1,9 +1,48 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="${relativePackage}.${activityClass}" >
+    tools:context="${relativePackage}.${activityClass}"
+    android:orientation="vertical"
+    android:gravity="center">
 
+   <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="90dp"
+        android:text="@string/select_role" />
+    <Button
+        android:id="@+id/btn_hospital"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:onClick="hospitalRole"
+        android:text="@string/btn_hospital" />
+
+    <Button
+        android:id="@+id/btn_helicopter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:onClick="helicopterRole"
+        android:text="@string/btn_helicopter" />
+    
+    <Button
+        android:id="@+id/btn_ambulance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:onClick="ambulanceRole"
+        android:text="@string/btn_ambulance" />
+
+    <Button
+        android:id="@+id/btn_checkpoint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:onClick="checkpointRole"
+        android:text="@string/btn_checkpoint" />
+ 
     <Button
         android:id="@+id/btn_listen"
         android:layout_width="wrap_content"
@@ -26,9 +65,7 @@
         android:id="@+id/txt_result"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/btn_send"
-        android:layout_centerHorizontal="true"
         android:layout_marginTop="60dp"
         android:text="" />
 
-</RelativeLayout>
+</LinearLayout>
