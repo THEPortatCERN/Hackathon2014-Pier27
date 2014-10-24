@@ -4,6 +4,7 @@ import static com.example.levon.utils.BluetoothUtils.HOSPITAL_SERVICE_NAME;
 import static com.example.levon.utils.BluetoothUtils.HOSPITAL_SERVICE_UUID;
 
 import java.io.IOException;
+import java.io.ObjectInputStream;
 
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
@@ -30,11 +31,17 @@ public class FighterJetService {
 
 	}
 
-	private SignedMessage read(BluetoothSocket socket)
-	{
-		return new SignedMessage("", new byte[]{});
+	private SignedMessage read(BluetoothSocket socket) throws IOException {
+		try {
+			ObjectInputStream i = new ObjectInputStream(socket.getInputStream());
+			String message = (String) i.readObject();
+			byte[] signature = (byte[]) i.readObject();
+			return new SignedMessage(message, signature);
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException(e);
+		}
 	}
-	
+
 	private class ReceiveThread extends Thread {
 		private BluetoothServerSocket serverSocket;
 
@@ -51,9 +58,10 @@ public class FighterJetService {
 				SignedMessage msg = read(socket);
 				log("Message received");
 
-				// TODO: validate message
 				// TODO: post to UI thread
-				delegate.onHospitalDiscovered(SignUtils.verify(msg.getMessage(), msg.getSignature(), TrustedParty.PUBLIC_KEY), msg.getMessage());
+				delegate.onHospitalDiscovered(SignUtils.verify(
+						msg.getMessage(), msg.getSignature(),
+						TrustedParty.PUBLIC_KEY), msg.getMessage());
 			} catch (IOException e) {
 				log("IOException: " + e.getMessage());
 			}

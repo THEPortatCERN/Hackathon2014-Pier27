@@ -3,6 +3,7 @@ package com.example.levon.services;
 import static com.example.levon.utils.BluetoothUtils.HOSPITAL_SERVICE_UUID;
 
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
@@ -93,9 +94,12 @@ public class HospitalService {
 			this.fakeCertificate = fakeCertificate;
 		}
 
-		private void send(BluetoothSocket socket, SignedMessage message)
+		private void send(BluetoothSocket socket, SignedMessage message) throws IOException
 		{
-			// TODO: send
+			ObjectOutputStream o = new ObjectOutputStream(socket.getOutputStream());
+			o.writeObject(message.getMessage());
+			o.writeObject(message.getSignature());
+			o.close();
 		}
 		
 		public void run() {
