@@ -1,4 +1,6 @@
-package com.example.levon;
+package com.example.levon.services;
+
+import static com.example.levon.utils.BluetoothUtils.HOSPITAL_SERVICE_UUID;
 
 import java.io.IOException;
 
@@ -10,6 +12,11 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+
+import com.example.levon.actors.FakeHospital;
+import com.example.levon.actors.Hospital;
+import com.example.levon.utils.BluetoothUtils;
+import com.example.levon.utils.SignedMessage;
 
 public class HospitalService {
 
@@ -95,7 +102,7 @@ public class HospitalService {
 		public void run() {
 			try {
 				BluetoothSocket socket = device
-						.createInsecureRfcommSocketToServiceRecord(Hospital.SERVICE_UUID);
+						.createInsecureRfcommSocketToServiceRecord(HOSPITAL_SERVICE_UUID);
 
 				if (socket != null) {
 					socket.connect();

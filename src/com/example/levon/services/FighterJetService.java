@@ -1,4 +1,7 @@
-package com.example.levon;
+package com.example.levon.services;
+
+import static com.example.levon.utils.BluetoothUtils.HOSPITAL_SERVICE_NAME;
+import static com.example.levon.utils.BluetoothUtils.HOSPITAL_SERVICE_UUID;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -31,18 +34,19 @@ public class FighterJetService {
 			try {
 				serverSocket = adapter
 						.listenUsingInsecureRfcommWithServiceRecord(
-								Hospital.SERVICE_NAME, Hospital.SERVICE_UUID);
+								HOSPITAL_SERVICE_NAME, HOSPITAL_SERVICE_UUID);
 				log("Waiting for connection ...");
 				BluetoothSocket socket = serverSocket.accept();
 				serverSocket.close(); // TODO: continue listen for connections
 				log("Connected");
 
-				ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
+				ObjectInputStream in = new ObjectInputStream(
+						socket.getInputStream());
 				// TODO: sync transfer protocol
 				byte[] message = in.readLine().getBytes();
 				byte[] signature = in.readLine().getBytes();
 				log("Message received");
-				
+
 				// TODO: validate message
 				// TODO: post to UI thread
 				delegate.onHospitalDiscovered(true, new String(message));
@@ -63,9 +67,7 @@ public class FighterJetService {
 			activity.startActivity(discoverableIntent);
 
 			new ReceiveThread().start();
-		}
-		else
-		{
+		} else {
 			log("ERROR: no bluetooth adapter found");
 		}
 	}

@@ -1,4 +1,7 @@
-package com.example.levon;
+package com.example.levon.actors;
+
+import com.example.levon.utils.SignUtils;
+import com.example.levon.utils.SignedMessage;
 
 public class FakeHospital {
 	private static final String message = "";

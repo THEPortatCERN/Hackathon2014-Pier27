@@ -1,6 +1,8 @@
-package com.example.levon;
+package com.example.levon.actors;
 
-public class CentralCertificate {
+import com.example.levon.utils.SignUtils;
+
+public class TrustedParty {
 
 	//
 	// Private key, generated using:

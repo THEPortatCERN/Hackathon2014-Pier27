@@ -1,4 +1,4 @@
-package com.example.levon;
+package com.example.levon.utils;
 
 public class SignedMessage {
 	private String message;
