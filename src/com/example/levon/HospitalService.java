@@ -1,7 +1,6 @@
 package com.example.levon;
 
 import java.io.IOException;
-import java.io.ObjectOutputStream;
 
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
@@ -88,6 +87,11 @@ public class HospitalService {
 			this.fakeCertificate = fakeCertificate;
 		}
 
+		private void send(BluetoothSocket socket, SignedMessage message)
+		{
+			// TODO: send
+		}
+		
 		public void run() {
 			try {
 				BluetoothSocket socket = device
@@ -96,22 +100,14 @@ public class HospitalService {
 				if (socket != null) {
 					socket.connect();
 					log("Connected to " + device.getName());
-					ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
-					
-					if (fakeMessage)
-						out.write(Fake.getFakeHospitalMessage());
+
+					if (fakeCertificate)
+						send(socket, FakeHospital.getMessageSignedWithFakeCertificate());
+					else if (fakeMessage)
+						send(socket, FakeHospital.getFakeHospitalMessage());
 					else
-						out.write(Hospital.getMessage());
-					
-					if (fakeMessage && fakeCertificate)
-						out.write(Fake.sign(Fake.getFakeHospitalMessage()));
-					else if (fakeCertificate)
-						out.write(Fake.sign(Hospital.getMessage()));
-					else 
-						out.write(Hospital.getMessage());
-					
-					out.write(Hospital.getSignature());
-					out.close();
+						send(socket, Hospital.getMessage());
+										
 					socket.close();
 					log("Message sent to " + device.getName());
 				}
