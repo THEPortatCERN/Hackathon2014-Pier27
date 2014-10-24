@@ -15,7 +15,6 @@ import android.content.IntentFilter;
 
 import com.example.levon.actors.FakeHospital;
 import com.example.levon.actors.Hospital;
-import com.example.levon.utils.BluetoothUtils;
 import com.example.levon.utils.SignedMessage;
 
 public class HospitalService {

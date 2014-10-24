@@ -4,13 +4,16 @@ import static com.example.levon.utils.BluetoothUtils.HOSPITAL_SERVICE_NAME;
 import static com.example.levon.utils.BluetoothUtils.HOSPITAL_SERVICE_UUID;
 
 import java.io.IOException;
-import java.io.ObjectInputStream;
 
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothServerSocket;
 import android.bluetooth.BluetoothSocket;
 import android.content.Intent;
+
+import com.example.levon.actors.TrustedParty;
+import com.example.levon.utils.SignUtils;
+import com.example.levon.utils.SignedMessage;
 
 public class FighterJetService {
 
@@ -27,6 +30,11 @@ public class FighterJetService {
 
 	}
 
+	private SignedMessage read(BluetoothSocket socket)
+	{
+		return new SignedMessage("", new byte[]{});
+	}
+	
 	private class ReceiveThread extends Thread {
 		private BluetoothServerSocket serverSocket;
 
@@ -40,16 +48,12 @@ public class FighterJetService {
 				serverSocket.close(); // TODO: continue listen for connections
 				log("Connected");
 
-				ObjectInputStream in = new ObjectInputStream(
-						socket.getInputStream());
-				// TODO: sync transfer protocol
-				byte[] message = in.readLine().getBytes();
-				byte[] signature = in.readLine().getBytes();
+				SignedMessage msg = read(socket);
 				log("Message received");
 
 				// TODO: validate message
 				// TODO: post to UI thread
-				delegate.onHospitalDiscovered(true, new String(message));
+				delegate.onHospitalDiscovered(SignUtils.verify(msg.getMessage(), msg.getSignature(), TrustedParty.PUBLIC_KEY), msg.getMessage());
 			} catch (IOException e) {
 				log("IOException: " + e.getMessage());
 			}
