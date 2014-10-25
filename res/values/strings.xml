@@ -8,6 +8,7 @@
     <string name="btn_helicopter">Helicopter</string>
     <string name="btn_ambulance">Ambulance</string>
     <string name="btn_checkpoint">Checkpoint</string>
+    <string name="btn_back">Back</string>
     <string name="select_role">Select your role:</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
@@ -19,6 +20,11 @@
     <string name="helicopter">Helicopter</string>
     <string name="ambulance">Ambulance</string>
     <string name="checkpoint">Checkpoint</string>
-    <string name="title_activity_sample">SampleActivity</string>
+    <string name="mainlayout">MainLayout</string>
+    <string name="ambulancelayout">AmbulanceLayout</string>
+    <string name="hospitallayout">HospitalLayout</string>
+    <string name="checkpointlayout">CheckpointLayout</string>
+    <string name="helicopterlayout">HelicopterLayout</string>
+        
 
 </resources>
