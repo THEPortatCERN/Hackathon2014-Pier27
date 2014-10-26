@@ -25,6 +25,7 @@
     <string name="hospitallayout">HospitalLayout</string>
     <string name="checkpointlayout">CheckpointLayout</string>
     <string name="helicopterlayout">HelicopterLayout</string>
-        
+    <string name="fake_message">Fake Message</string>
+    <string name="fake_certificate">Fake Certificate</string>
 
 </resources>

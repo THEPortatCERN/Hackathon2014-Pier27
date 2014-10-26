@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.CheckBox;
 
 public class HospitalActivity extends Activity {
 
@@ -25,6 +26,15 @@ public class HospitalActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_hospital);
 		addBackButtonListener();
+		
+        final CheckBox checkBoxFakeMsg = (CheckBox) findViewById(R.id.check_fake_hospital_msg);
+        if (checkBoxFakeMsg.isChecked()) {
+        	checkBoxFakeMsg.setChecked(false);
+        }
+        final CheckBox checkBoxFakeCert = (CheckBox) findViewById(R.id.check_fake_hospital_cert);
+        if (checkBoxFakeCert.isChecked()) {
+        	checkBoxFakeCert.setChecked(false);
+        }
 	}
 	
     public void addBackButtonListener() {
