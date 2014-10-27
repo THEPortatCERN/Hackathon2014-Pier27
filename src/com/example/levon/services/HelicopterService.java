@@ -93,6 +93,7 @@ public class HelicopterService extends Service {
 	}
 
 	public void stop() {
+		super.stop();
 		if (adapter != null) {
 			BluetoothUtils.endDiscoverable(activity);
 			adapter = null;

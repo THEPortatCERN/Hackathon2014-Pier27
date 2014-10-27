@@ -25,7 +25,7 @@ public class HospitalService extends Service {
 
 	private boolean fakeMessge = false;
 	private boolean fakeCertificate = false;
-	
+
 	public HospitalService(Activity activity, LogDelegate log) {
 		super(activity, log);
 	}
@@ -46,7 +46,8 @@ public class HospitalService extends Service {
 						BluetoothDevice device = intent
 								.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
 						log("Discovered: " + device.getName());
-						new SendThread(device, fakeMessge, fakeCertificate).start();
+						new SendThread(device, fakeMessge, fakeCertificate)
+								.start();
 					}
 				}
 			};
@@ -59,6 +60,7 @@ public class HospitalService extends Service {
 	}
 
 	public void stop() {
+		super.stop();
 		if (adapter != null) {
 			activity.unregisterReceiver(receiver);
 			receiver = null;
@@ -80,22 +82,27 @@ public class HospitalService extends Service {
 		private boolean fakeMessage = false;
 		private boolean fakeCertificate = false;
 
-		public SendThread(BluetoothDevice device, boolean fakeMessage, boolean fakeCertificate) {
+		public SendThread(BluetoothDevice device, boolean fakeMessage,
+				boolean fakeCertificate) {
 			this.device = device;
 			this.fakeMessage = fakeMessage;
 			this.fakeCertificate = fakeCertificate;
 		}
 
-		private void send(BluetoothSocket socket, SignedMessage message) throws IOException
-		{
-			ObjectOutputStream o = new ObjectOutputStream(socket.getOutputStream());
+		private void send(BluetoothSocket socket, SignedMessage message)
+				throws IOException {
+			ObjectOutputStream o = new ObjectOutputStream(
+					socket.getOutputStream());
 			o.writeObject(message.getMessage());
 			o.writeObject(message.getSignature());
 			o.flush();
 		}
-		
+
 		public void run() {
 			try {
+				// Cancel discovery while sending, since it is heavy and will slow connecting
+				adapter.cancelDiscovery();
+
 				BluetoothSocket socket = device
 						.createInsecureRfcommSocketToServiceRecord(HOSPITAL_SERVICE_UUID);
 
@@ -103,18 +110,26 @@ public class HospitalService extends Service {
 					socket.connect();
 					log("Connected to " + device.getName());
 
-					if (fakeCertificate)
-						send(socket, FakeHospital.getMessageSignedWithFakeCertificate());
-					else if (fakeMessage)
-						send(socket, FakeHospital.getFakeHospitalMessage());
-					else
-						send(socket, Hospital.getMessage());
-										
-					log("Message sent to " + device.getName());
-					socket.close();
+					try {
+						if (fakeCertificate)
+							send(socket,
+									FakeHospital
+											.getMessageSignedWithFakeCertificate());
+						else if (fakeMessage)
+							send(socket, FakeHospital.getFakeHospitalMessage());
+						else
+							send(socket, Hospital.getMessage());
+
+						log("Message sent to " + device.getName());
+						socket.close();
+					} catch (IOException e) {
+						log("IOException: " + e.getMessage());
+					}
 				}
 			} catch (IOException e) {
-				log("IOException: " + e.getMessage());
+				// Ignore exceptions on connect()
+			} finally {
+				adapter.startDiscovery();
 			}
 		}
 	}
