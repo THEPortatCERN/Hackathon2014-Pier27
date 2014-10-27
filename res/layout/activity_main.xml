@@ -38,30 +38,5 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:text="@string/btn_checkpoint" />
- 
-    <Button
-        android:id="@+id/btn_listen"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="90dp"
-        android:text="@string/btn_listen" />
-
-    <Button
-        android:id="@+id/btn_send"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/btn_listen"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
-        android:text="@string/btn_send" />
-
-    <TextView
-        android:id="@+id/txt_result"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        android:text="" />
 
 </LinearLayout>
