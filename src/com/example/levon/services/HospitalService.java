@@ -50,7 +50,6 @@ public class HospitalService extends Service {
 					}
 				}
 			};
-			// Register the BroadcastReceiver
 			IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
 			activity.registerReceiver(receiver, filter);
 		} else {
@@ -92,7 +91,7 @@ public class HospitalService extends Service {
 			ObjectOutputStream o = new ObjectOutputStream(socket.getOutputStream());
 			o.writeObject(message.getMessage());
 			o.writeObject(message.getSignature());
-			o.close();
+			o.flush();
 		}
 		
 		public void run() {
@@ -111,8 +110,8 @@ public class HospitalService extends Service {
 					else
 						send(socket, Hospital.getMessage());
 										
-					socket.close();
 					log("Message sent to " + device.getName());
+					socket.close();
 				}
 			} catch (IOException e) {
 				log("IOException: " + e.getMessage());

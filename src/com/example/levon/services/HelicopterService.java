@@ -20,8 +20,10 @@ public class HelicopterService extends Service {
 
 	private BluetoothAdapter adapter = null;
 	private HelicopterDelegate delegate = null;
+	private ReceiveThread thread;
 
-	public HelicopterService(Activity activity, LogDelegate log, HelicopterDelegate d) {
+	public HelicopterService(Activity activity, LogDelegate log,
+			HelicopterDelegate d) {
 		super(activity, log);
 		delegate = d;
 	}
@@ -40,26 +42,38 @@ public class HelicopterService extends Service {
 	private class ReceiveThread extends Thread {
 		private BluetoothServerSocket serverSocket;
 
+		public void close() {
+			try {
+				serverSocket.close();
+			} catch (IOException e) {
+				// Ignore exceptions
+			}
+		}
+
 		public void run() {
 			try {
 				serverSocket = adapter
 						.listenUsingInsecureRfcommWithServiceRecord(
 								HOSPITAL_SERVICE_NAME, HOSPITAL_SERVICE_UUID);
-				log("Waiting for connection ...");
-				BluetoothSocket socket = serverSocket.accept();
-				serverSocket.close(); // TODO: continue listen for connections
-				log("Connected");
+				while (true) {
 
-				final SignedMessage msg = read(socket);
-				log("Message received");
+					log("Waiting for connection ...");
+					BluetoothSocket socket = serverSocket.accept();
+					log("Connected");
 
-				activity.runOnUiThread(new Runnable() {
-					@Override
-					public void run() {
-						delegate.onHospitalDiscovered(SignUtils.verify(
-								msg.getMessage(), msg.getSignature(),
-								TrustedParty.PUBLIC_KEY), msg.getMessage());
-					}});
+					final SignedMessage msg = read(socket);
+					log("Message received");
+					socket.close();
+
+					activity.runOnUiThread(new Runnable() {
+						@Override
+						public void run() {
+							delegate.onHospitalDiscovered(SignUtils.verify(
+									msg.getMessage(), msg.getSignature(),
+									TrustedParty.PUBLIC_KEY), msg.getMessage());
+						}
+					});
+				}
 			} catch (IOException e) {
 				log("IOException: " + e.getMessage());
 			}
@@ -71,7 +85,8 @@ public class HelicopterService extends Service {
 
 		if (adapter != null) {
 			BluetoothUtils.beginDiscoverable(activity);
-			new ReceiveThread().start();
+			thread = new ReceiveThread();
+			thread.start();
 		} else {
 			log("ERROR: no bluetooth adapter found");
 		}
@@ -80,7 +95,11 @@ public class HelicopterService extends Service {
 	public void stop() {
 		if (adapter != null) {
 			BluetoothUtils.endDiscoverable(activity);
-			// TODO: stop thread listening for messages
+			adapter = null;
+		}
+		if (thread != null) {
+			thread.close();
+			thread = null;
 		}
 	}
 }
