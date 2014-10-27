@@ -12,6 +12,7 @@ import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothServerSocket;
 import android.bluetooth.BluetoothSocket;
 
+import com.example.levon.actors.Ambulance;
 import com.example.levon.utils.BluetoothUtils;
 import com.example.levon.utils.Challenge;
 import com.example.levon.utils.Response;
@@ -27,9 +28,8 @@ public class AmbulanceService extends Service {
 	private Challenge read(BluetoothSocket socket) throws IOException {
 		try {
 			ObjectInputStream i = new ObjectInputStream(socket.getInputStream());
-			String message = (String) i.readObject();
-			byte[] signature = (byte[]) i.readObject();
-			return new Challenge();
+			String randomString = (String) i.readObject();
+			return new Challenge(randomString);
 		} catch (ClassNotFoundException e) {
 			throw new RuntimeException(e);
 		}
@@ -38,6 +38,10 @@ public class AmbulanceService extends Service {
 	private void send(BluetoothSocket socket, Response response)
 			throws IOException {
 		ObjectOutputStream o = new ObjectOutputStream(socket.getOutputStream());
+		o.writeObject(response.getChallengeSignature());
+		o.writeObject(response.getMessage());
+		o.writeObject(response.getSignature());
+		o.writeObject(response.getCertificate());
 	}
 
 	private class ReceiveThread extends Thread {
@@ -56,9 +60,9 @@ public class AmbulanceService extends Service {
 				Challenge challenge = read(socket);
 				log("Challenge received");
 
-//				Response response = new Response(challenge);
-//				send(socket, response);
-//				log("Response sent");
+				Response response = Ambulance.createResponse(challenge);
+				send(socket, response);
+				log("Response sent");
 			} catch (IOException e) {
 				log("IOException: " + e.getMessage());
 			}

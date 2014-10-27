@@ -29,7 +29,7 @@ public class TrustedParty {
 	//
 	// Public key, extracted using:
 	//
-	// $ openssl rsa -in central_key.pem -pubout
+	// $ openssl rsa -in central.key -pubout
 	//
 	public static final String PUBLIC_KEY = "-----BEGIN PUBLIC KEY-----\n"
 			+ "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDvd3nuRTl4xm33VKH/SC9mVp8B\n"
