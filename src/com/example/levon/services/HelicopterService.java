@@ -50,13 +50,16 @@ public class HelicopterService extends Service {
 				serverSocket.close(); // TODO: continue listen for connections
 				log("Connected");
 
-				SignedMessage msg = read(socket);
+				final SignedMessage msg = read(socket);
 				log("Message received");
 
-				// TODO: post to UI thread
-				delegate.onHospitalDiscovered(SignUtils.verify(
-						msg.getMessage(), msg.getSignature(),
-						TrustedParty.PUBLIC_KEY), msg.getMessage());
+				activity.runOnUiThread(new Runnable() {
+					@Override
+					public void run() {
+						delegate.onHospitalDiscovered(SignUtils.verify(
+								msg.getMessage(), msg.getSignature(),
+								TrustedParty.PUBLIC_KEY), msg.getMessage());
+					}});
 			} catch (IOException e) {
 				log("IOException: " + e.getMessage());
 			}

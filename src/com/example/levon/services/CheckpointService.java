@@ -91,8 +91,6 @@ public class CheckpointService extends Service {
 				String certificate = (String) i.readObject();
 				return new Response(challengeSignature, message, signature,
 						certificate);
-			} catch (ClassCastException e) {
-				throw new RuntimeException(e);
 			} catch (ClassNotFoundException e) {
 				throw new RuntimeException(e);
 			}
