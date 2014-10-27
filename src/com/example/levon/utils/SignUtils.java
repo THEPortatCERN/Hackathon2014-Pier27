@@ -8,16 +8,40 @@ import java.security.PublicKey;
 import java.security.Signature;
 import java.security.SignatureException;
 import java.security.spec.InvalidKeySpecException;
+import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 
+import android.util.Base64;
+
 public class SignUtils {
+
+	private static boolean matches(String[] lines, String first, String last) {
+		return (lines[0].equals(first) && lines[lines.length - 1].equals(last));
+	}
+
+	private static byte[] pem2der(String pem) {
+		String[] lines = pem.split("\n");
+
+		if (lines.length > 2) {
+			StringBuffer sb = new StringBuffer();
+			for (int i = 1; i < lines.length - 1; i++)
+				sb.append(lines[i]);
+
+			if (matches(lines, "-----BEGIN PRIVATE KEY-----",
+					"-----END PRIVATE KEY-----")
+					|| matches(lines, "-----BEGIN PUBLIC KEY-----",
+							"-----END PUBLIC KEY-----"))
+				return Base64.decode(sb.toString(), Base64.DEFAULT);
+		}
+		throw new RuntimeException("Unrecognized pem format");
+	}
 
 	public static byte[] sign(String message, String privateKey) {
 		try {
 			KeyFactory keyFactory = KeyFactory.getInstance("RSA");
 			PrivateKey privKey = keyFactory
-					.generatePrivate(new X509EncodedKeySpec(privateKey
-							.getBytes()));
+					.generatePrivate(new PKCS8EncodedKeySpec(
+							pem2der(privateKey)));
 
 			Signature sign = Signature.getInstance("SHA256withRSA");
 			sign.initSign(privKey);
@@ -43,7 +67,7 @@ public class SignUtils {
 		try {
 			KeyFactory keyFactory = KeyFactory.getInstance("RSA");
 			PublicKey pubKey = keyFactory
-					.generatePublic(new X509EncodedKeySpec(publicKey.getBytes()));
+					.generatePublic(new X509EncodedKeySpec(pem2der(publicKey)));
 
 			Signature sign = Signature.getInstance("SHA256withRSA");
 			sign.initVerify(pubKey);

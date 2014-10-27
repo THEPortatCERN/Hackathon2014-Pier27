@@ -7,23 +7,24 @@ public class TrustedParty {
 	//
 	// Private key, generated using:
 	//
-	// $ openssl genrsa -out central_key.pem 1024
+	// $ openssl genrsa -out central.key 1024
+	// $ openssl pkcs8 -topk8 -inform pem -in central.key -outform pem -nocrypt -out central.pk8
 	//
-	private static final String PRIVATE_KEY = "-----BEGIN RSA PRIVATE KEY-----\n"
-			+ "MIICXAIBAAKBgQDvd3nuRTl4xm33VKH/SC9mVp8BjnswdMyaQIYRqFFtNN7wD8it\n"
-			+ "cOgMcDw399ORyvkQJIthPh0VqvWgNibSpfnMVZJyAY8WtdLw9InbLNgCBMx4DJKH\n"
-			+ "gUGci7gjXBEyLVaQsvHRL4pi/N8zp+tCAMKmKlU/K/mnHG+v3T1HgpWWcQIDAQAB\n"
-			+ "AoGBAOmEpBWz0dCyCChpkrQkC30LuXFGJWFidOdzRopPjmAlb8XATpy7/r2qcT7O\n"
-			+ "4LVKrsiMKpNAhBJOLcr3I7LFgipa1fMOiXeXi5Hat3udEiWkeYZtppal+X9AspI4\n"
-			+ "M/nmwymwAtXBriWsYxc4AsbQ8lSaNZXPVADdas7TX/LOG2b1AkEA+olt1hzdnOCX\n"
-			+ "1+oG5BFBEmJ78Jkm4ZnNy7NoDXom43Xkk3hS2VUf0B19TCmwdELaOSHw095fb72g\n"
-			+ "NEi/ltQYzwJBAPSwQCEHfqkJ9ccFccQXudmwr4swLZvemcIIt7kJXcFASFICIwA1\n"
-			+ "zT+/pqbUtV1nVe6m7B7wIkSJaQ/3cT6UrL8CQEk2Bamuz7e7DcQjeBYHULudmdgp\n"
-			+ "+Omt9yxSZdKiYmDPn5bUb2lg7aX0KBwshorCymAtoeFXtw3BHOKKa6oYmpMCQFS/\n"
-			+ "swZ9nQ4ZSApNxXCgsxtGChcQccuZ1vGQqWmqZ9GmXSYiXVMWT2e0Dpmb9NFMGERX\n"
-			+ "hlLU41mPqlcAYjXFsusCQENjyeoXO24F67uXvitmB3Zk8X2C9Y8ulQ3b650awkCX\n"
-			+ "Kq5C077q9C/EqigNxMxYgu/McT3zQjBRHZ0cno5QZJ8=\n"
-			+ "-----END RSA PRIVATE KEY-----\n";
+	private static final String PRIVATE_KEY = "-----BEGIN PRIVATE KEY-----\n"
+			+ "MIICdgIBADANBgkqhkiG9w0BAQEFAASCAmAwggJcAgEAAoGBAO93ee5FOXjGbfdU\n"
+			+ "of9IL2ZWnwGOezB0zJpAhhGoUW003vAPyK1w6AxwPDf305HK+RAki2E+HRWq9aA2\n"
+			+ "JtKl+cxVknIBjxa10vD0idss2AIEzHgMkoeBQZyLuCNcETItVpCy8dEvimL83zOn\n"
+			+ "60IAwqYqVT8r+accb6/dPUeClZZxAgMBAAECgYEA6YSkFbPR0LIIKGmStCQLfQu5\n"
+			+ "cUYlYWJ053NGik+OYCVvxcBOnLv+vapxPs7gtUquyIwqk0CEEk4tyvcjssWCKlrV\n"
+			+ "8w6Jd5eLkdq3e50SJaR5hm2mlqX5f0Cykjgz+ebDKbAC1cGuJaxjFzgCxtDyVJo1\n"
+			+ "lc9UAN1qztNf8s4bZvUCQQD6iW3WHN2c4JfX6gbkEUESYnvwmSbhmc3Ls2gNeibj\n"
+			+ "deSTeFLZVR/QHX1MKbB0Qto5IfDT3l9vvaA0SL+W1BjPAkEA9LBAIQd+qQn1xwVx\n"
+			+ "xBe52bCvizAtm96Zwgi3uQldwUBIUgIjADXNP7+mptS1XWdV7qbsHvAiRIlpD/dx\n"
+			+ "PpSsvwJASTYFqa7Pt7sNxCN4FgdQu52Z2Cn46a33LFJl0qJiYM+fltRvaWDtpfQo\n"
+			+ "HCyGisLKYC2h4Ve3DcEc4oprqhiakwJAVL+zBn2dDhlICk3FcKCzG0YKFxBxy5nW\n"
+			+ "8ZCpaapn0aZdJiJdUxZPZ7QOmZv00UwYRFeGUtTjWY+qVwBiNcWy6wJAQ2PJ6hc7\n"
+			+ "bgXru5e+K2YHdmTxfYL1jy6VDdvrnRrCQJcqrkLTvur0L8SqKA3EzFiC78xxPfNC\n"
+			+ "MFEdnRyejlBknw==\n" + "-----END PRIVATE KEY-----";
 
 	//
 	// Public key, extracted using:
@@ -35,7 +36,7 @@ public class TrustedParty {
 			+ "jnswdMyaQIYRqFFtNN7wD8itcOgMcDw399ORyvkQJIthPh0VqvWgNibSpfnMVZJy\n"
 			+ "AY8WtdLw9InbLNgCBMx4DJKHgUGci7gjXBEyLVaQsvHRL4pi/N8zp+tCAMKmKlU/\n"
 			+ "K/mnHG+v3T1HgpWWcQIDAQAB\n" + "-----END PUBLIC KEY-----\n";
-	
+
 	public static byte[] sign(String message) {
 		return SignUtils.sign(message, PRIVATE_KEY);
 	}
