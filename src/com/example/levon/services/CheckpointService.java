@@ -3,6 +3,7 @@ package com.example.levon.services;
 import static com.example.levon.utils.BluetoothUtils.HOSPITAL_SERVICE_UUID;
 
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 import android.app.Activity;
@@ -14,19 +15,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 
-import com.example.levon.actors.FakeHospital;
-import com.example.levon.actors.Hospital;
-import com.example.levon.utils.SignedMessage;
+import com.example.levon.actors.Checkpoint;
+import com.example.levon.utils.Challenge;
+import com.example.levon.utils.Response;
 
-public class HospitalService extends Service {
+public class CheckpointService extends Service {
 
 	private BluetoothAdapter adapter = null;
 	private BroadcastReceiver receiver = null;
 
-	private boolean fakeMessge = false;
-	private boolean fakeCertificate = false;
-	
-	public HospitalService(Activity activity, LogDelegate log) {
+	public CheckpointService(Activity activity, LogDelegate log) {
 		super(activity, log);
 	}
 
@@ -46,7 +44,7 @@ public class HospitalService extends Service {
 						BluetoothDevice device = intent
 								.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
 						log("Discovered: " + device.getName());
-						new SendThread(device, fakeMessge, fakeCertificate).start();
+						new SendThread(device).start();
 					}
 				}
 			};
@@ -68,33 +66,40 @@ public class HospitalService extends Service {
 		}
 	}
 
-	public void setUseFakeMessage(boolean fake) {
-		fakeMessge = fake;
-	}
-
-	public void setUseFakeCertificate(boolean fake) {
-		fakeCertificate = fake;
-	}
-
 	private class SendThread extends Thread {
 		private BluetoothDevice device;
-		private boolean fakeMessage = false;
-		private boolean fakeCertificate = false;
 
-		public SendThread(BluetoothDevice device, boolean fakeMessage, boolean fakeCertificate) {
+		public SendThread(BluetoothDevice device) {
 			this.device = device;
-			this.fakeMessage = fakeMessage;
-			this.fakeCertificate = fakeCertificate;
 		}
 
-		private void send(BluetoothSocket socket, SignedMessage message) throws IOException
-		{
-			ObjectOutputStream o = new ObjectOutputStream(socket.getOutputStream());
-			o.writeObject(message.getMessage());
-			o.writeObject(message.getSignature());
+		private void send(BluetoothSocket socket, Challenge challenge)
+				throws IOException {
+			ObjectOutputStream o = new ObjectOutputStream(
+					socket.getOutputStream());
+			o.writeObject(challenge.getRandomString());
 			o.close();
 		}
-		
+
+		private Response read(BluetoothSocket socket) throws IOException {
+			try {
+				ObjectInputStream i = new ObjectInputStream(
+						socket.getInputStream());
+				byte[] challengeSignature = (byte[]) i.readObject();
+				String message = (String) i.readObject();
+				byte[] signature = (byte[]) i.readObject();
+				String certificate = (String) i.readObject();
+				return new Response(challengeSignature, message, signature,
+						certificate);
+			} catch (ClassNotFoundException e) {
+				throw new RuntimeException(e);
+			}
+		}
+
+		private boolean validate(Challenge challenge, Response response) {
+			return true;
+		}
+
 		public void run() {
 			try {
 				BluetoothSocket socket = device
@@ -104,15 +109,15 @@ public class HospitalService extends Service {
 					socket.connect();
 					log("Connected to " + device.getName());
 
-					if (fakeCertificate)
-						send(socket, FakeHospital.getMessageSignedWithFakeCertificate());
-					else if (fakeMessage)
-						send(socket, FakeHospital.getFakeHospitalMessage());
-					else
-						send(socket, Hospital.getMessage());
-										
+					Challenge challenge = Checkpoint.createChallenge();
+					send(socket, challenge);
+					log("Challenge sent to " + device.getName());
+
+					Response response = read(socket);
+					log("Response received from " + device.getName());
+
 					socket.close();
-					log("Message sent to " + device.getName());
+					validate(challenge, response);
 				}
 			} catch (IOException e) {
 				log("IOException: " + e.getMessage());
