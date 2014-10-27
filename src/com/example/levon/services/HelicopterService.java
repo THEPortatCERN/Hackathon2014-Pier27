@@ -10,26 +10,20 @@ import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothServerSocket;
 import android.bluetooth.BluetoothSocket;
-import android.content.Intent;
 
 import com.example.levon.actors.TrustedParty;
 import com.example.levon.utils.BluetoothUtils;
 import com.example.levon.utils.SignUtils;
 import com.example.levon.utils.SignedMessage;
 
-public class FighterJetService {
+public class HelicopterService extends Service {
 
 	private BluetoothAdapter adapter = null;
-	private Activity activity = null;
-	private FighterJetDelegate delegate = null;
+	private HelicopterDelegate delegate = null;
 
-	public FighterJetService(Activity a, FighterJetDelegate d) {
-		activity = a;
+	public HelicopterService(Activity activity, LogDelegate log, HelicopterDelegate d) {
+		super(activity, log);
 		delegate = d;
-	}
-
-	private void log(String msg) {
-
 	}
 
 	private SignedMessage read(BluetoothSocket socket) throws IOException {

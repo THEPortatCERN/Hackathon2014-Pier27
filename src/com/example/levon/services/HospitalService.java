@@ -18,21 +18,16 @@ import com.example.levon.actors.FakeHospital;
 import com.example.levon.actors.Hospital;
 import com.example.levon.utils.SignedMessage;
 
-public class HospitalService {
+public class HospitalService extends Service {
 
 	private BluetoothAdapter adapter = null;
 	private BroadcastReceiver receiver = null;
-	private Activity activity = null;
 
 	private boolean fakeMessge = false;
 	private boolean fakeCertificate = false;
 	
-	public HospitalService(Activity a) {
-		activity = a;
-	}
-
-	private void log(String msg) {
-
+	public HospitalService(Activity activity, LogDelegate log) {
+		super(activity, log);
 	}
 
 	public void start() {

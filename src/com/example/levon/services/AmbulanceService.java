@@ -16,17 +16,12 @@ import com.example.levon.utils.BluetoothUtils;
 import com.example.levon.utils.Challenge;
 import com.example.levon.utils.Response;
 
-public class AmbulanceService {
+public class AmbulanceService extends Service {
 
 	private BluetoothAdapter adapter = null;
-	private Activity activity = null;
 
-	public AmbulanceService(Activity a) {
-		activity = a;
-	}
-
-	private void log(String msg) {
-
+	public AmbulanceService(Activity activity, LogDelegate log) {
+		super(activity, log);
 	}
 
 	private Challenge read(BluetoothSocket socket) throws IOException {

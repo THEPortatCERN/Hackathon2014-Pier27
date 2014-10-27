@@ -1,5 +1,5 @@
 package com.example.levon.services;
 
-public interface FighterJetDelegate {
+public interface HelicopterDelegate {
 	void onHospitalDiscovered(boolean authentic, String message);
 }
