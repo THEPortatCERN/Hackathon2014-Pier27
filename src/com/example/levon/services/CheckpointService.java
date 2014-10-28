@@ -125,7 +125,7 @@ public class CheckpointService extends Service {
 					log("Response received from " + device.getName());
 
 					socket.close();
-					validate(challenge, response);
+					delegate.onAmbulanceDiscovered(validate(challenge, response), response.getMessage());
 				}
 			} catch (IOException e) {
 				log("IOException: " + e.getMessage());
