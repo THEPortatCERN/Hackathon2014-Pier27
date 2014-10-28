@@ -100,7 +100,8 @@ public class HospitalService extends Service {
 
 		public void run() {
 			try {
-				// Cancel discovery while sending, since it is heavy and will slow connecting
+				// Cancel discovery while sending, since it is heavy and will
+				// slow connecting
 				adapter.cancelDiscovery();
 
 				BluetoothSocket socket = device
@@ -121,15 +122,17 @@ public class HospitalService extends Service {
 							send(socket, Hospital.getMessage());
 
 						log("Message sent to " + device.getName());
-						socket.close();
 					} catch (IOException e) {
 						log("IOException: " + e.getMessage());
 					}
+					socket.close();
 				}
 			} catch (IOException e) {
 				// Ignore exceptions on connect()
 			} finally {
-				adapter.startDiscovery();
+				if (adapter != null) {
+					adapter.startDiscovery();
+				}
 			}
 		}
 	}
