@@ -15,6 +15,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/checkpoint" />
+    <TextView android:id="@+id/checkpoint_log"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxLines="4"
+        android:scrollbars="vertical"/>
+    <TextView android:id="@+id/ambulance_detected"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
     <Button
         android:id="@+id/btn_back_checkpoint"
         android:layout_width="wrap_content"

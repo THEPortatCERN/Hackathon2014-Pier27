@@ -1,6 +1,6 @@
 package com.example.levon.services;
 
-import static com.example.levon.utils.BluetoothUtils.HOSPITAL_SERVICE_UUID;
+import static com.example.levon.utils.BluetoothUtils.AMBULANCE_SERVICE_UUID;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -25,8 +25,8 @@ public class CheckpointService extends Service {
 	private BroadcastReceiver receiver = null;
 	private CheckpointDelegate delegate;
 
-	public CheckpointService(Activity activity, CheckpointDelegate d,
-			LogDelegate log) {
+	public CheckpointService(Activity activity, LogDelegate log,
+			CheckpointDelegate d) {
 		super(activity, log);
 		delegate = d;
 	}
@@ -82,7 +82,7 @@ public class CheckpointService extends Service {
 			ObjectOutputStream o = new ObjectOutputStream(
 					socket.getOutputStream());
 			o.writeObject(challenge.getRandomString());
-			o.close();
+			o.flush();
 		}
 
 		private Response read(BluetoothSocket socket) throws IOException {
@@ -111,24 +111,35 @@ public class CheckpointService extends Service {
 				adapter.cancelDiscovery();
 
 				BluetoothSocket socket = device
-						.createInsecureRfcommSocketToServiceRecord(HOSPITAL_SERVICE_UUID);
+						.createInsecureRfcommSocketToServiceRecord(AMBULANCE_SERVICE_UUID);
 
 				if (socket != null) {
 					socket.connect();
 					log("Connected to " + device.getName());
 
-					Challenge challenge = Checkpoint.createChallenge();
-					send(socket, challenge);
-					log("Challenge sent to " + device.getName());
+					try {
+						final Challenge challenge = Checkpoint.createChallenge();
+						send(socket, challenge);
+						log("Challenge sent to " + device.getName());
 
-					Response response = read(socket);
-					log("Response received from " + device.getName());
+						final Response response = read(socket);
+						log("Response received from " + device.getName());
 
+						activity.runOnUiThread(new Runnable(){
+							@Override
+							public void run() {
+								delegate.onAmbulanceDiscovered(
+										validate(challenge, response),
+										response.getMessage());
+							}
+						});
+					} catch (IOException e) {
+						log("IOException: " + e.getMessage());
+					}
 					socket.close();
-					delegate.onAmbulanceDiscovered(validate(challenge, response), response.getMessage());
 				}
 			} catch (IOException e) {
-				log("IOException: " + e.getMessage());
+				// Ignore exceptions on connect()
 			} finally {
 				if (adapter != null) {
 					adapter.startDiscovery();

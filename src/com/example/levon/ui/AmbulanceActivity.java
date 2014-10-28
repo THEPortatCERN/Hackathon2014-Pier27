@@ -10,23 +10,31 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.TextView;
 
 import com.example.levon.MainActivity;
 import com.example.levon.R;
 import com.example.levon.services.AmbulanceService;
+import com.example.levon.services.LogDelegate;
 
 public class AmbulanceActivity extends Activity {
 	
 	Button backBtn;
 	CheckBox fakeCheckBox;
 	AmbulanceService  ambulance;
-
+	TextView logTxt;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_ambulance);
-		ambulance = new AmbulanceService(this, null);
-		//ambulance.start();
+		ambulance = new AmbulanceService(this, new LogDelegate() {
+			public void log(String msg) {
+				logTxt = (TextView) findViewById(R.id.ambulance_log);
+				logTxt.append("\n"+msg);
+			}
+		});
+		ambulance.start();
 		addBackButtonListener();
 		addFakeMsgCheckBoxListener();
 		addFakeCertCheckBoxListener();
@@ -81,7 +89,7 @@ public class AmbulanceActivity extends Activity {
 	@Override
 	protected void onDestroy(){
 		super.onDestroy();
-		//ambulance.stop();
+		ambulance.stop();
 		ambulance=null;
 	}
 

@@ -43,6 +43,7 @@ public class AmbulanceService extends Service {
 		o.writeObject(response.getMessage());
 		o.writeObject(response.getSignature());
 		o.writeObject(response.getCertificate());
+		o.flush();
 	}
 
 	private class ReceiveThread extends Thread {
@@ -71,7 +72,6 @@ public class AmbulanceService extends Service {
 
 					log("Waiting for connection ...");
 					BluetoothSocket socket = ss.accept();
-					serverSocket.close();
 					log("Connected");
 
 					Challenge challenge = read(socket);

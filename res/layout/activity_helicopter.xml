@@ -18,7 +18,9 @@
     
     <TextView android:id="@+id/helicopter_log"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:maxLines="4"
+        android:scrollbars="vertical"/>
     
     <TextView android:id="@+id/hospital_detected"
         android:layout_width="wrap_content"
