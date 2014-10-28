@@ -45,6 +45,7 @@ public class HelicopterService extends Service {
 		public void close() {
 			try {
 				serverSocket.close();
+				serverSocket = null;
 			} catch (IOException e) {
 				// Ignore exceptions
 			}
@@ -56,9 +57,13 @@ public class HelicopterService extends Service {
 						.listenUsingInsecureRfcommWithServiceRecord(
 								HOSPITAL_SERVICE_NAME, HOSPITAL_SERVICE_UUID);
 				while (true) {
+					BluetoothServerSocket ss = serverSocket;
+					if (ss == null) {
+						break;
+					}
 
 					log("Waiting for connection ...");
-					BluetoothSocket socket = serverSocket.accept();
+					BluetoothSocket socket = ss.accept();
 					log("Connected");
 
 					final SignedMessage msg = read(socket);

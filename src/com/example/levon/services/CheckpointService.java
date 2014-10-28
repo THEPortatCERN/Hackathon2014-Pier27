@@ -23,9 +23,12 @@ public class CheckpointService extends Service {
 
 	private BluetoothAdapter adapter = null;
 	private BroadcastReceiver receiver = null;
+	private CheckpointDelegate delegate;
 
-	public CheckpointService(Activity activity, LogDelegate log) {
+	public CheckpointService(Activity activity, CheckpointDelegate d,
+			LogDelegate log) {
 		super(activity, log);
+		delegate = d;
 	}
 
 	public void start() {
@@ -58,6 +61,7 @@ public class CheckpointService extends Service {
 	}
 
 	public void stop() {
+		super.stop();
 		if (adapter != null) {
 			activity.unregisterReceiver(receiver);
 			receiver = null;
@@ -102,6 +106,10 @@ public class CheckpointService extends Service {
 
 		public void run() {
 			try {
+				// Cancel discovery while sending, since it is heavy and will
+				// slow connecting
+				adapter.cancelDiscovery();
+
 				BluetoothSocket socket = device
 						.createInsecureRfcommSocketToServiceRecord(HOSPITAL_SERVICE_UUID);
 
@@ -121,6 +129,10 @@ public class CheckpointService extends Service {
 				}
 			} catch (IOException e) {
 				log("IOException: " + e.getMessage());
+			} finally {
+				if (adapter != null) {
+					adapter.startDiscovery();
+				}
 			}
 		}
 	}

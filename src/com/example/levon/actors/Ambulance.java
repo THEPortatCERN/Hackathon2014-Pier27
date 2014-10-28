@@ -49,7 +49,7 @@ public class Ambulance {
 			+ "oKznB0X6yADYhDO8T9Iv/J5MtChXiNFyF98NeWoJ03ecOTGtF3R1HX785Q1fswn5\n"
 			+ "hk/2hCTPRCukorKjgrSwlXq1Xg==\n" + "-----END CERTIFICATE-----\n";
 
-	private static final String message = "";
+	private static final String message = "Reg Nr: ABC 123\nDriver Name: Olle Sol\nOrganization: Red Cross";
 	private static final byte[] signature = SignUtils.sign(message, PRIVATE_KEY);
 	
 	public static Response createResponse(Challenge challenge)

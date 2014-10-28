@@ -20,6 +20,7 @@ import com.example.levon.utils.Response;
 public class AmbulanceService extends Service {
 
 	private BluetoothAdapter adapter = null;
+	private ReceiveThread thread = null;
 
 	public AmbulanceService(Activity activity, LogDelegate log) {
 		super(activity, log);
@@ -47,22 +48,39 @@ public class AmbulanceService extends Service {
 	private class ReceiveThread extends Thread {
 		private BluetoothServerSocket serverSocket;
 
+		public void close() {
+			try {
+				serverSocket.close();
+				serverSocket = null;
+			} catch (IOException e) {
+				// Ignore exceptions
+			}
+		}
+
 		public void run() {
 			try {
 				serverSocket = adapter
 						.listenUsingInsecureRfcommWithServiceRecord(
 								AMBULANCE_SERVICE_NAME, AMBULANCE_SERVICE_UUID);
-				log("Waiting for connection ...");
-				BluetoothSocket socket = serverSocket.accept();
-				serverSocket.close(); // TODO: continue listen for connections
-				log("Connected");
 
-				Challenge challenge = read(socket);
-				log("Challenge received");
+				while (true) {
+					BluetoothServerSocket ss = serverSocket;
+					if (ss == null) {
+						break;
+					}
 
-				Response response = Ambulance.createResponse(challenge);
-				send(socket, response);
-				log("Response sent");
+					log("Waiting for connection ...");
+					BluetoothSocket socket = ss.accept();
+					serverSocket.close();
+					log("Connected");
+
+					Challenge challenge = read(socket);
+					log("Challenge received");
+
+					Response response = Ambulance.createResponse(challenge);
+					send(socket, response);
+					log("Response sent");
+				}
 			} catch (IOException e) {
 				log("IOException: " + e.getMessage());
 			}
@@ -74,16 +92,20 @@ public class AmbulanceService extends Service {
 
 		if (adapter != null) {
 			BluetoothUtils.beginDiscoverable(activity);
-			new ReceiveThread().start();
+			thread = new ReceiveThread();
+			thread.start();
 		} else {
 			log("ERROR: no bluetooth adapter found");
 		}
 	}
 
 	public void stop() {
+		super.stop();
 		if (adapter != null) {
 			BluetoothUtils.endDiscoverable(activity);
-			// TODO: stop thread listening for messages
+		}
+		if (thread != null) {
+			thread.close();
 		}
 	}
 }
