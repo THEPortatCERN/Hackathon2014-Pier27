@@ -5,6 +5,7 @@ import static com.example.levon.utils.BluetoothUtils.AMBULANCE_SERVICE_UUID;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.HashSet;
 
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
@@ -24,6 +25,7 @@ public class CheckpointService extends Service {
 	private BluetoothAdapter adapter = null;
 	private BroadcastReceiver receiver = null;
 	private CheckpointDelegate delegate;
+	private HashSet<String> detectedDevices = new HashSet<String>();
 
 	public CheckpointService(Activity activity, LogDelegate log,
 			CheckpointDelegate d) {
@@ -46,8 +48,12 @@ public class CheckpointService extends Service {
 					if (BluetoothDevice.ACTION_FOUND.equals(action)) {
 						BluetoothDevice device = intent
 								.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+						if(!detectedDevices.contains(device.getAddress()))
+						{
+							detectedDevices.add(device.getAddress());
 						log("Discovered: " + device.getName());
 						new SendThread(device).start();
+						}
 					}
 				}
 			};

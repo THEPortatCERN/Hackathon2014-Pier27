@@ -5,6 +5,7 @@ import static com.example.levon.utils.BluetoothUtils.HOSPITAL_SERVICE_UUID;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.util.HashMap;
 
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;

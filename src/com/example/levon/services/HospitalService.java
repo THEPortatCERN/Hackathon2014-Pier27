@@ -4,6 +4,8 @@ import static com.example.levon.utils.BluetoothUtils.HOSPITAL_SERVICE_UUID;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.util.HashMap;
+import java.util.HashSet;
 
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
@@ -25,6 +27,7 @@ public class HospitalService extends Service {
 
 	private boolean fakeMessge = false;
 	private boolean fakeCertificate = false;
+	private HashSet<String> detectedDevices = new HashSet<String>();
 
 	public HospitalService(Activity activity, LogDelegate log) {
 		super(activity, log);
@@ -45,9 +48,13 @@ public class HospitalService extends Service {
 					if (BluetoothDevice.ACTION_FOUND.equals(action)) {
 						BluetoothDevice device = intent
 								.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
-						log("Discovered: " + device.getName());
-						new SendThread(device, fakeMessge, fakeCertificate)
-								.start();
+						if(!detectedDevices.contains(device.getAddress()))
+						{
+							detectedDevices.add(device.getAddress());
+							log("Discovered: " + device.getName());
+							new SendThread(device, fakeMessge, fakeCertificate)
+									.start();
+								}
 					}
 				}
 			};
