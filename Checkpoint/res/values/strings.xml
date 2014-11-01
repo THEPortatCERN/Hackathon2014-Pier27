@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Checkpoint</string>
+    <string name="btn_checkpoint">Checkpoint</string>
+    <string name="btn_back">Back</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_checkpoint">CheckpointActivity</string>
+    <string name="checkpoint">Checkpoint</string>
+    <string name="mainlayout">MainLayout</string>
+    <string name="checkpointlayout">CheckpointLayout</string>
+    <string name="fake_message">Fake Message</string>
+    <string name="fake_certificate">Fake Certificate</string>
+    <string name="info">Info</string>
+	<string name="close">Close</string>
+</resources>
