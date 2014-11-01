@@ -13,6 +13,7 @@ import android.bluetooth.BluetoothServerSocket;
 import android.bluetooth.BluetoothSocket;
 
 import com.example.levon.actors.Ambulance;
+import com.example.levon.actors.FakeAmbulance;
 import com.example.levon.utils.BluetoothUtils;
 import com.example.levon.utils.Challenge;
 import com.example.levon.utils.Response;
@@ -39,8 +40,7 @@ public class AmbulanceService extends Service {
 		}
 	}
 
-	private void send(BluetoothSocket socket, Response response)
-			throws IOException {
+	private void send(BluetoothSocket socket, Response response) throws IOException {
 		ObjectOutputStream o = new ObjectOutputStream(socket.getOutputStream());
 		o.writeObject(response.getChallengeSignature());
 		o.writeObject(response.getMessage());
@@ -63,9 +63,8 @@ public class AmbulanceService extends Service {
 
 		public void run() {
 			try {
-				serverSocket = adapter
-						.listenUsingInsecureRfcommWithServiceRecord(
-								AMBULANCE_SERVICE_NAME, AMBULANCE_SERVICE_UUID);
+				serverSocket = adapter.listenUsingInsecureRfcommWithServiceRecord(AMBULANCE_SERVICE_NAME,
+						AMBULANCE_SERVICE_UUID);
 
 				while (true) {
 					BluetoothServerSocket ss = serverSocket;
@@ -80,11 +79,13 @@ public class AmbulanceService extends Service {
 					Challenge challenge = read(socket);
 					log("Challenge received");
 
-					Response response = Ambulance.createResponse(challenge);
-					send(socket, response);
+					if (fakeMessage)
+						send(socket, FakeAmbulance.createFakeMessageResponse(challenge));
+					else
+						send(socket, Ambulance.createResponse(challenge));
 					log("Response sent");
-					
-					activity.runOnUiThread(new Runnable(){
+
+					activity.runOnUiThread(new Runnable() {
 						@Override
 						public void run() {
 							delegate.onResponseSent(true);
@@ -118,11 +119,11 @@ public class AmbulanceService extends Service {
 			thread.close();
 		}
 	}
-	
+
 	public String getMessage() {
-			return Ambulance.getMessage();
+		return Ambulance.getMessage();
 	}
-	
+
 	public void setUseFakeMessage(boolean fake) {
 		this.fakeMessage = fake;
 	}
