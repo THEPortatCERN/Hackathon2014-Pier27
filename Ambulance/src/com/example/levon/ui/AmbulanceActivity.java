@@ -4,6 +4,7 @@ import android.app.ActionBar.LayoutParams;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
@@ -37,8 +39,8 @@ public class AmbulanceActivity extends Activity {
 		ambulance = new AmbulanceService(this, logDelegate, ambulanceDelegate);
 		ambulance.start();
 		addBackButtonListener();
-		addFakeMsgCheckBoxListener();
-		addFakeCertCheckBoxListener();
+		//addFakeMsgCheckBoxListener();
+		//addFakeCertCheckBoxListener();
 		 TextView infoText = (TextView) findViewById(R.id.driver_name);
 		 AmbulanceInfo ambulanceInfo = getAmbulanceInfoFromString(ambulance.getMessage());
 		 infoText = (TextView) findViewById(R.id.driver_name);
@@ -49,8 +51,12 @@ public class AmbulanceActivity extends Activity {
 		 infoText.setText(ambulanceInfo.getOrganization());
 		 infoText = (TextView) findViewById(R.id.signed_by);
 		 infoText.setText(ambulanceInfo.getSignedBy());
+		 ImageView scanningImage = (ImageView) findViewById(R.id.scanning_image);
+		 scanningImage.setBackgroundResource(R.drawable.pic_no_400ok);
 		
 	}
+	
+
 	
 	private LogDelegate logDelegate = new LogDelegate() {
 		public void log(String msg) {
@@ -63,6 +69,8 @@ public class AmbulanceActivity extends Activity {
 		@Override
 		public void onResponseSent(boolean responseSent) {
 			//responseSent will control which image to show
+			 ImageView scanningImage = (ImageView) findViewById(R.id.scanning_image);
+			 scanningImage.setBackgroundResource(R.drawable.pic_yes_400ok);
 		}		
 	};
     
@@ -75,7 +83,7 @@ public class AmbulanceActivity extends Activity {
 		ambulanceInfo.setSignedBy(split[3]);
 		return ambulanceInfo;
 	}
-	   public void addFakeMsgCheckBoxListener() {
+	/*   public void addFakeMsgCheckBoxListener() {
 		   
 			fakeCheckBox = (CheckBox) findViewById(R.id.check_fake_ambulance_msg);
 			fakeCheckBox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
@@ -102,7 +110,7 @@ public class AmbulanceActivity extends Activity {
 			});
 	 
 		}
-	
+	*/
     public void addBackButtonListener() {
       	 
 		final Context context = this;

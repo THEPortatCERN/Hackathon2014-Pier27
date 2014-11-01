@@ -11,6 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:text="@string/btn_ambulance" />
+        android:background="@android:color/transparent"
+		android:drawableTop="@drawable/appiconcolor"/>
 
 </LinearLayout>

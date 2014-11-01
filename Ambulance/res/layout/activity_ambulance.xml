@@ -10,23 +10,27 @@
     android:orientation="vertical"
     android:gravity="center"
     tools:context="com.example.levon.ui.AmbulanceActivity" >
-    
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/ambulance" />
-    <CheckBox
+     <ImageView
+      android:id="@+id/scanning_image"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"/>
+    <!--CheckBox
         android:id="@+id/check_fake_ambulance_msg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/fake_message"
-        android:checked="false" />
-    <CheckBox
+        android:checked="false" /-->
+    <!--CheckBox
         android:id="@+id/check_fake_ambulance_cert"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/fake_certificate"
-        android:checked="false" />
+        android:checked="false"/-->
+    <TextView android:id="@+id/ambulance_log"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxLines="5"
+        android:scrollbars="vertical"/>
      <TextView
           android:id="@+id/driver_name"
           android:layout_width="fill_parent"
@@ -43,12 +47,6 @@
           android:id="@+id/signed_by"
           android:layout_width="fill_parent"
           android:layout_height="wrap_content" />
-      
-    <TextView android:id="@+id/ambulance_log"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:maxLines="5"
-        android:scrollbars="vertical"/>
     <Button
         android:id="@+id/btn_back_ambulance"
         android:layout_width="wrap_content"

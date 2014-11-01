@@ -3,10 +3,12 @@ package com.example.levon.ui;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.levon.MainActivity;
@@ -28,6 +30,9 @@ public class CheckpointActivity extends Activity {
 		checkpoint = new CheckpointService(this, logDelegate, checkpointDelegate);
 		checkpoint.start();
 		addBackButtonListener();
+	//	ImageView scanningImage = (ImageView) findViewById(R.id.scanning_image);
+	  //  scanningImage.setBackgroundResource(R.drawable.pic_no_400ok);
+
 	}
 	
 	private LogDelegate logDelegate = new LogDelegate() {
@@ -36,6 +41,20 @@ public class CheckpointActivity extends Activity {
 			logTxt.append("\n"+msg);
 		}		
 	};
+	
+	@Override
+	public void onWindowFocusChanged(boolean hasFocus) {
+	    // TODO Auto-generated method stub
+	    super.onWindowFocusChanged(hasFocus);
+	    if (hasFocus) {
+			 
+			ImageView scanningImage = (ImageView) findViewById(R.id.scanning_image);
+			 scanningImage.setBackgroundResource(R.anim.scanning);
+
+			 AnimationDrawable scanningAnimation = (AnimationDrawable) scanningImage.getBackground();
+			 scanningAnimation.start();
+	    }
+	}
 	
 	private CheckpointDelegate checkpointDelegate = new CheckpointDelegate() {
 		@Override
@@ -46,6 +65,8 @@ public class CheckpointActivity extends Activity {
 			ambulanceTxt.setText(authenticStr);
 			//If it is an authentic ambulance, show the info
 			if(authentic) {
+				 ImageView scanningImage = (ImageView) findViewById(R.id.scanning_image);
+				 scanningImage.setBackgroundResource(R.drawable.pic_yes_400ok);
 				 AmbulanceInfo ambulance = getAmbulanceInfoFromString(message);
 				 ambulanceTxt = (TextView) findViewById(R.id.driver_name);
 				 ambulanceTxt.setText(ambulance.getDriverName());
@@ -55,6 +76,10 @@ public class CheckpointActivity extends Activity {
 				 ambulanceTxt.setText(ambulance.getOrganization());
 				 ambulanceTxt = (TextView) findViewById(R.id.signed_by);
 				 ambulanceTxt.setText(ambulance.getSignedBy());
+			}
+			else {
+				 ImageView scanningImage = (ImageView) findViewById(R.id.scanning_image);
+				 scanningImage.setBackgroundResource(R.drawable.pic_no_400ok);
 			}
 		}		
 	};
