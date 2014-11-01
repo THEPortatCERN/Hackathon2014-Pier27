@@ -4,8 +4,7 @@ import com.example.levon.utils.SignUtils;
 import com.example.levon.utils.SignedMessage;
 
 public class FakeHospital {
-	private static final String message = "Hospital name: Red Cross\nLocation: 0°,0°\nSigned by: safezone.org";
-
+	private static final String message = "Name: Impostors Inc\nLatitude: -10.345324\nLongitude: 17.905111\nLocation: somewhere in Angola\nSigned by: nostrike.org";
 	//
 	// Fake private key, generated using:
 	//

@@ -14,6 +14,8 @@ import android.bluetooth.BluetoothServerSocket;
 import android.bluetooth.BluetoothSocket;
 
 import com.example.levon.actors.Ambulance;
+import com.example.levon.actors.FakeHospital;
+import com.example.levon.actors.Hospital;
 import com.example.levon.utils.BluetoothUtils;
 import com.example.levon.utils.Challenge;
 import com.example.levon.utils.Response;
@@ -108,5 +110,9 @@ public class AmbulanceService extends Service {
 		if (thread != null) {
 			thread.close();
 		}
+	}
+	
+	public String getMessage() {
+			return Ambulance.getMessage();
 	}
 }

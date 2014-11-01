@@ -4,7 +4,7 @@ import com.example.levon.utils.SignedMessage;
 
 public class Hospital {
 
-	private static final String message = "Hospital name: Red Cross\nLocation: +38°,-9°\nSigned by: safezone.org";
+	private static final String message = "Name: General Hospital\nLatitude: -18.898449\nLongitude: 47.504368\nLocation: Antananarivo, Madagascar\nSigned by: nostrike.org";
 	private static final byte[] signature = TrustedParty.sign(message);
 	
 	public static SignedMessage getMessage()

@@ -49,12 +49,16 @@ public class Ambulance {
 			+ "oKznB0X6yADYhDO8T9Iv/J5MtChXiNFyF98NeWoJ03ecOTGtF3R1HX785Q1fswn5\n"
 			+ "hk/2hCTPRCukorKjgrSwlXq1Xg==\n" + "-----END CERTIFICATE-----\n";
 
-	private static final String message = "Reg Nr: ABC 123\nDriver Name: Olle Sol\nOrganization: Red Cross";
+	private static final String message = "Driver Name: Marc Robinson\nLicense plate: 475 REV\nOrganization: Emergency Services Madagascar\nSigned by: nostrike.org";
 	private static final byte[] signature = SignUtils.sign(message, PRIVATE_KEY);
 	
 	public static Response createResponse(Challenge challenge)
 	{
 		byte[] challengeSignature = SignUtils.sign(challenge.getRandomString(), PRIVATE_KEY);
 		return new Response(challengeSignature, message, signature, PUBLIC_CERTIFICATE);
+	}
+	
+	public static String getMessage(){
+		return message;
 	}
 }

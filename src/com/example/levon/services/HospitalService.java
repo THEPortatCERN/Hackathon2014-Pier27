@@ -25,7 +25,7 @@ public class HospitalService extends Service {
 	private BluetoothAdapter adapter = null;
 	private BroadcastReceiver receiver = null;
 
-	private boolean fakeMessge = false;
+	private boolean fakeMessage = false;
 	private boolean fakeCertificate = false;
 	private HashSet<String> detectedDevices = new HashSet<String>();
 
@@ -52,7 +52,7 @@ public class HospitalService extends Service {
 						{
 							detectedDevices.add(device.getAddress());
 							log("Discovered: " + device.getName());
-							new SendThread(device, fakeMessge, fakeCertificate)
+							new SendThread(device, fakeMessage, fakeCertificate)
 									.start();
 								}
 					}
@@ -75,9 +75,16 @@ public class HospitalService extends Service {
 			adapter = null;
 		}
 	}
+	
+	public String getMessage() {
+		if (fakeMessage)
+			return FakeHospital.getFakeHospitalMessage().getMessage();
+		else
+			return Hospital.getMessage().getMessage();
+	}
 
 	public void setUseFakeMessage(boolean fake) {
-		fakeMessge = fake;
+		fakeMessage = fake;
 	}
 
 	public void setUseFakeCertificate(boolean fake) {
