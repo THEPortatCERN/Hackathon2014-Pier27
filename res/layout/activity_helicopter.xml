@@ -25,9 +25,7 @@
         android:layout_height="wrap_content"/>
     <Button
         android:id="@+id/btn_back_helicopter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        style="@style/ButtonStyle"
         android:text="@string/btn_back" />
 
 </LinearLayout>
