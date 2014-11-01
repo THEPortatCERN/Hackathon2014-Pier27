@@ -27,8 +27,19 @@ public class Ambulance {
 			+ "lpCxAkAOdkK+25h6F9ulAoX669ODtaA908FiV8Wvc3PJVkXOWrZ/9bhoR+gCRJpd\n"
 			+ "abI6+a5qh0BN4fJoQuOPYgqh5Sn9AkAylkNx8ocvMY91rR5BoI4nfofvHkvZayDp\n"
 			+ "qx1qN9Wl7YkWjBFXUXG1hdEV3sAGpTZD4kIdot3mDIPjF1bJXCSBAkEAxgxr6hBi\n"
-			+ "+2PVaRY+uDiClFYLRrI77MRb3mSzePGmzDCa/DYrnqxNHrjmrxlhBlwQWHB2a/Os\n"
-			+ "nhieSGFss/V3jA==\n" + "-----END PRIVATE KEY-----\n";
+			+ "+2PVaRY+uDiClFYLRrI77MRb3mSzePGmzDCa/DYrnqxNHrjmrxlhBlwQWHB2a/Os\n" + "nhieSGFss/V3jA==\n"
+			+ "-----END PRIVATE KEY-----\n";
+
+	//
+	// Public key, generated using:
+	//
+	// $ openssl rsa -in ambulance.key -pubout
+	//
+	public static final String PUBLIC_KEY = "-----BEGIN PUBLIC KEY-----\n"
+			+ "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQD5wHogFmyoVodaBsN/LVzE3yTx\n"
+			+ "J1UkNdSpmkNCPboXUI3wRp/gn1CefUY6wUi1FNx6Cekos6mHnUEbykxv1XrVy2wI\n"
+			+ "Jw4juK+rLFKiem1yuCtp7g0vrMIN+HOFKd+TWVqQtkl6RBoyKIsVFaSIAZG38Rn4\n" + "nwin3LFuSEDOGrjmVQIDAQAB\n"
+			+ "-----END PUBLIC KEY-----\n";
 
 	//
 	// Public certificate, signed by the trusted party, generated using:
@@ -46,19 +57,19 @@ public class Ambulance {
 			+ "FrXS8PSJ2yzYAgTMeAySh4FBnIu4I1wRMi1WkLLx0S+KYvzfM6frQgDCpipVPyv5\n"
 			+ "pxxvr909R4KVlnECAwEAATANBgkqhkiG9w0BAQUFAAOBgQCFbjLT9lg9JpaqLy9r\n"
 			+ "RPdHymu8MXxZkwkNtSX0/HTwgDO22w2M0spcIAai84Qj6mzqnn17PBmkV3k0xlFQ\n"
-			+ "oKznB0X6yADYhDO8T9Iv/J5MtChXiNFyF98NeWoJ03ecOTGtF3R1HX785Q1fswn5\n"
-			+ "hk/2hCTPRCukorKjgrSwlXq1Xg==\n" + "-----END CERTIFICATE-----\n";
+			+ "oKznB0X6yADYhDO8T9Iv/J5MtChXiNFyF98NeWoJ03ecOTGtF3R1HX785Q1fswn5\n" + "hk/2hCTPRCukorKjgrSwlXq1Xg==\n"
+			+ "-----END CERTIFICATE-----\n";
 
 	private static final String message = "Marc Robinson\n 475 REV\nEmergency Services\n nostrike.org\n";
 	private static final byte[] signature = SignUtils.sign(message, PRIVATE_KEY);
-	
-	public static Response createResponse(Challenge challenge)
-	{
+
+	public static Response createResponse(Challenge challenge) {
 		byte[] challengeSignature = SignUtils.sign(challenge.getRandomString(), PRIVATE_KEY);
-		return new Response(challengeSignature, message, signature, PUBLIC_CERTIFICATE);
+		// TODO: should return PUBLIC_CErtIFICATe instead of PUBLIC_KEY, but cannot get verification to work with a certificate
+		return new Response(challengeSignature, message, signature, PUBLIC_KEY);
 	}
-	
-	public static String getMessage(){
+
+	public static String getMessage() {
 		return message;
 	}
 }
