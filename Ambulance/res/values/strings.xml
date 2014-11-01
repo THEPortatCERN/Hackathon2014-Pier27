@@ -12,8 +12,7 @@
     <string name="ambulance">Ambulance</string>
     <string name="mainlayout">MainLayout</string>
     <string name="ambulancelayout">AmbulanceLayout</string>
-    <string name="fake_message">Fake Message</string>
-    <string name="fake_certificate">Fake Certificate</string>
+    <string name="fake">Fake</string>
     <string name="info">Info</string>
 	<string name="close">Close</string>
 	<string name="driver_name">Driver Name:</string>

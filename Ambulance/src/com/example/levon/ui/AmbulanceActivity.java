@@ -39,8 +39,7 @@ public class AmbulanceActivity extends Activity {
 		ambulance = new AmbulanceService(this, logDelegate, ambulanceDelegate);
 		ambulance.start();
 		addBackButtonListener();
-		//addFakeMsgCheckBoxListener();
-		//addFakeCertCheckBoxListener();
+		addFakeMsgCheckBoxListener();
 		 TextView infoText = (TextView) findViewById(R.id.driver_name);
 		 AmbulanceInfo ambulanceInfo = getAmbulanceInfoFromString(ambulance.getMessage());
 		 infoText = (TextView) findViewById(R.id.driver_name);
@@ -96,8 +95,7 @@ public class AmbulanceActivity extends Activity {
 		ambulanceInfo.setSignedBy(split[3]);
 		return ambulanceInfo;
 	}
-	/*   public void addFakeMsgCheckBoxListener() {
-		   /*
+	public void addFakeMsgCheckBoxListener() {
 			fakeCheckBox = (CheckBox) findViewById(R.id.check_fake_ambulance_msg);
 			fakeCheckBox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
@@ -109,7 +107,7 @@ public class AmbulanceActivity extends Activity {
 			});
 	 
 		}
-	    
+	 /*   
 	    public void addFakeCertCheckBoxListener() {
 	    	 
 			fakeCheckBox = (CheckBox) findViewById(R.id.check_fake_ambulance_cert);

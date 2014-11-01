@@ -48,6 +48,15 @@
                         android:maxLines="5"
                         android:padding="3dip" />
                 </TableRow>
+                <TableRow>
+                   <CheckBox
+		            android:id="@+id/check_fake_ambulance_msg"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:checked="false"
+		            android:text="@string/fake" />
+                </TableRow>
+
             </TableLayout>
         </TableRow>
     </TableLayout>
@@ -80,22 +89,7 @@
                 android:gravity="left"
                 android:padding="3dip" />
         </TableRow>
-        <!--
-         hide them for now
-        <CheckBox
-            android:id="@+id/check_fake_ambulance_msg"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="false"
-            android:text="@string/fake_message" />
 
-        <CheckBox
-            android:id="@+id/check_fake_ambulance_cert"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="false"
-            android:text="@string/fake_certificate" />
-        -->
     </TableLayout>
 
     <TableLayout android:layout_row="2" >

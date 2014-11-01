@@ -22,7 +22,6 @@ public class AmbulanceService extends Service {
 	private BluetoothAdapter adapter = null;
 	private ReceiveThread thread = null;
 	private boolean fakeMessage = false;
-	private boolean fakeCertificate = false;
 	private AmbulanceDelegate delegate;
 
 	public AmbulanceService(Activity activity, LogDelegate log, AmbulanceDelegate d) {
@@ -125,10 +124,7 @@ public class AmbulanceService extends Service {
 	}
 	
 	public void setUseFakeMessage(boolean fake) {
-		fakeMessage = fake;
+		this.fakeMessage = fake;
 	}
 
-	public void setUseFakeCertificate(boolean fake) {
-		fakeCertificate = fake;
-	}
 }

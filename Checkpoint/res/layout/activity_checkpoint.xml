@@ -9,12 +9,8 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
     android:gravity="center"
-    tools:context="com.example.levon.ui.CheckpointActivity" >
-    <ImageView
-      android:id="@+id/white_circle"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:src="@drawable/pic_whitecircle_400x400"/>
+    tools:context="com.example.levon.ui.CheckpointActivity"
+    android:background="@color/background">
      <ImageView
       android:id="@+id/scanning_image"
       android:layout_width="wrap_content"
