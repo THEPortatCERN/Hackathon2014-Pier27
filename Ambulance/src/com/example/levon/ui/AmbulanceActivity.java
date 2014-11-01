@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
@@ -26,7 +27,7 @@ import com.example.levon.utils.AmbulanceInfo;
 
 public class AmbulanceActivity extends Activity {
 	
-	Button backBtn;
+	ImageButton backBtn;
 	CheckBox fakeCheckBox;
 	Button openPopUp;
 	AmbulanceService  ambulance;
@@ -125,7 +126,7 @@ public class AmbulanceActivity extends Activity {
     public void addBackButtonListener() {
       	 
 		final Context context = this;
-		backBtn = (Button) findViewById(R.id.btn_back_ambulance);
+		backBtn = (ImageButton) findViewById(R.id.btn_back_ambulance);
 		backBtn.setOnClickListener(new OnClickListener() {
  
 			@Override
