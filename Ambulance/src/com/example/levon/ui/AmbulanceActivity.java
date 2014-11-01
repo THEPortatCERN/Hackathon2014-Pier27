@@ -56,6 +56,19 @@ public class AmbulanceActivity extends Activity {
 		
 	}
 	
+	@Override
+	public void onWindowFocusChanged(boolean hasFocus) {
+	    // TODO Auto-generated method stub
+	    super.onWindowFocusChanged(hasFocus);
+	    if (hasFocus) {
+			 
+			ImageView scanningImage = (ImageView) findViewById(R.id.scanning_image);
+			 scanningImage.setBackgroundResource(R.anim.scanning);
+
+			 AnimationDrawable scanningAnimation = (AnimationDrawable) scanningImage.getBackground();
+			 scanningAnimation.start();
+	    }
+	}
 
 	
 	private LogDelegate logDelegate = new LogDelegate() {
@@ -70,6 +83,8 @@ public class AmbulanceActivity extends Activity {
 		public void onResponseSent(boolean responseSent) {
 			//responseSent will control which image to show
 			 ImageView scanningImage = (ImageView) findViewById(R.id.scanning_image);
+			 AnimationDrawable scanningAnimation = (AnimationDrawable) scanningImage.getBackground();
+			 scanningAnimation.stop();
 			 scanningImage.setBackgroundResource(R.drawable.pic_yes_400ok);
 		}		
 	};

@@ -66,6 +66,8 @@ public class CheckpointActivity extends Activity {
 			//If it is an authentic ambulance, show the info
 			if(authentic) {
 				 ImageView scanningImage = (ImageView) findViewById(R.id.scanning_image);
+				 AnimationDrawable scanningAnimation = (AnimationDrawable) scanningImage.getBackground();
+				 scanningAnimation.stop();
 				 scanningImage.setBackgroundResource(R.drawable.pic_yes_400ok);
 				 AmbulanceInfo ambulance = getAmbulanceInfoFromString(message);
 				 ambulanceTxt = (TextView) findViewById(R.id.driver_name);
@@ -79,6 +81,8 @@ public class CheckpointActivity extends Activity {
 			}
 			else {
 				 ImageView scanningImage = (ImageView) findViewById(R.id.scanning_image);
+				 AnimationDrawable scanningAnimation = (AnimationDrawable) scanningImage.getBackground();
+				 scanningAnimation.stop();
 				 scanningImage.setBackgroundResource(R.drawable.pic_no_400ok);
 			}
 		}		
