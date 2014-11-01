@@ -84,7 +84,7 @@ public class AmbulanceActivity extends Activity {
 		return ambulanceInfo;
 	}
 	/*   public void addFakeMsgCheckBoxListener() {
-		   
+		   /*
 			fakeCheckBox = (CheckBox) findViewById(R.id.check_fake_ambulance_msg);
 			fakeCheckBox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
