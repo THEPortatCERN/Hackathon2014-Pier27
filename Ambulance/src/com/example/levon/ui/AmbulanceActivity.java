@@ -51,8 +51,6 @@ public class AmbulanceActivity extends Activity {
 		 infoText.setText(ambulanceInfo.getOrganization());
 		 infoText = (TextView) findViewById(R.id.signed_by);
 		 infoText.setText(ambulanceInfo.getSignedBy());
-		 ImageView scanningImage = (ImageView) findViewById(R.id.scanning_image);
-		 scanningImage.setBackgroundResource(R.drawable.pic_no_400ok);
 		
 	}
 	

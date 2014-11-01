@@ -49,7 +49,7 @@ public class Ambulance {
 			+ "oKznB0X6yADYhDO8T9Iv/J5MtChXiNFyF98NeWoJ03ecOTGtF3R1HX785Q1fswn5\n"
 			+ "hk/2hCTPRCukorKjgrSwlXq1Xg==\n" + "-----END CERTIFICATE-----\n";
 
-	private static final String message = "Marc Robinson\n 475 REV\n Emergency Services Madagascar\n nostrike.org\n";
+	private static final String message = "Marc Robinson\n 475 REV\nEmergency Services\n nostrike.org\n";
 	private static final byte[] signature = SignUtils.sign(message, PRIVATE_KEY);
 	
 	public static Response createResponse(Challenge challenge)
