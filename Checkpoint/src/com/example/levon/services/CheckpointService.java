@@ -19,6 +19,7 @@ import android.content.IntentFilter;
 import com.example.levon.actors.Checkpoint;
 import com.example.levon.utils.Challenge;
 import com.example.levon.utils.Response;
+import com.example.levon.utils.SignUtils;
 
 public class CheckpointService extends Service {
 
@@ -107,7 +108,10 @@ public class CheckpointService extends Service {
 		}
 
 		private boolean validate(Challenge challenge, Response response) {
-			return true;
+			// TODO: only verifying challenge and message signatures, must also verify certificate against trusted party cert
+			// TODO: certificate is currently only the public key, could not get certificate validating working
+			return SignUtils.verify(challenge.getRandomString(), response.getChallengeSignature(), response.getCertificate()) &&
+					SignUtils.verify(response.getMessage(), response.getSignature(), response.getCertificate());
 		}
 
 		public void run() {
