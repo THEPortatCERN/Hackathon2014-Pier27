@@ -21,7 +21,7 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 		addCheckpointButtonListener();
 
-		Test.selfTest();
+		//Test.selfTest();
 	}
 
 	public void addCheckpointButtonListener() {

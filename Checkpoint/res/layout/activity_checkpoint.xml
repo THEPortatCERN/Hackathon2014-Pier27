@@ -45,7 +45,7 @@
         android:id="@+id/fake_message"
         style="@style/textstylebold"
         android:layout_marginBottom="6dp"
-        android:gravity="left"
+        android:gravity="center"
         android:layout_height="wrap_content"
         android:layout_marginLeft="40dp"
         android:layout_marginTop="20dp"

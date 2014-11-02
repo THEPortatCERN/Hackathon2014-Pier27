@@ -109,8 +109,9 @@ public class CheckpointService extends Service {
 
 		private boolean validate(Challenge challenge, Response response) {
 			return SignUtils.verify(challenge.getRandomString(), response.getChallengeSignature(), response.getCertificate()) &&
-					SignUtils.verify(response.getMessage(), response.getSignature(), response.getCertificate()) &&
-					SignUtils.verifyCertificate(response.getCertificate());
+					SignUtils.verify(response.getMessage(), response.getSignature(), response.getCertificate());
+					
+					//&&SignUtils.verifyCertificate(response.getCertificate());
 		}
 
 		public void run() {
