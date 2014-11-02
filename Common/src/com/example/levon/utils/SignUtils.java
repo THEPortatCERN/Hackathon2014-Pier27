@@ -2,6 +2,7 @@ package com.example.levon.utils;
 
 import java.io.ByteArrayInputStream;
 import java.io.UnsupportedEncodingException;
+import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.KeyFactory;
 import java.security.NoSuchAlgorithmException;
@@ -9,13 +10,20 @@ import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.security.Signature;
 import java.security.SignatureException;
+import java.security.cert.CertPath;
+import java.security.cert.CertPathValidator;
+import java.security.cert.CertPathValidatorException;
 import java.security.cert.Certificate;
 import java.security.cert.CertificateException;
 import java.security.cert.CertificateFactory;
+import java.security.cert.PKIXParameters;
+import java.security.cert.TrustAnchor;
+import java.security.cert.X509Certificate;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 import java.util.Arrays;
+import java.util.Collections;
 
 import android.util.Base64;
 
@@ -157,9 +165,24 @@ public class SignUtils {
 		try {
 			Certificate received = getCertificate(certificate);
 			Certificate trusted = getCertificate(TrustedParty.PUBLIC_CERTIFICATE);
-			certFactory.generateCertPath(Arrays.asList(received, trusted));
+			CertPath path = certFactory.generateCertPath(Arrays.asList(received));
+
+			TrustAnchor ta = new TrustAnchor((X509Certificate) trusted, null);
+			PKIXParameters params = new PKIXParameters(Collections.singleton(ta));
+			params.setRevocationEnabled(false);
+			CertPathValidator cpv = CertPathValidator.getInstance(CertPathValidator.getDefaultType());
+			cpv.validate(path, params);
+
 			return true;
+		} catch (CertPathValidatorException e) {
+			return false;
 		} catch (CertificateException e) {
+			// This is not expected to happen, no error handling
+			throw new RuntimeException(e);
+		} catch (InvalidAlgorithmParameterException e) {
+			// This is not expected to happen, no error handling
+			throw new RuntimeException(e);
+		} catch (NoSuchAlgorithmException e) {
 			// This is not expected to happen, no error handling
 			throw new RuntimeException(e);
 		}

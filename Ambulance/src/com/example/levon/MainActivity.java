@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
+import com.example.levon.test.Test;
 import com.example.levon.ui.AmbulanceActivity;
 
 public class MainActivity extends Activity {
@@ -19,6 +20,8 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
        addAmbulanceButtonListener();
+       
+		Test.selfTest();
     }
     
     public void addAmbulanceButtonListener() {

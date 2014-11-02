@@ -23,6 +23,7 @@ public class AmbulanceService extends Service {
 	private BluetoothAdapter adapter = null;
 	private ReceiveThread thread = null;
 	private boolean fakeMessage = false;
+	private boolean fakeCert = false;
 	private AmbulanceDelegate delegate;
 
 	public AmbulanceService(Activity activity, LogDelegate log, AmbulanceDelegate d) {
@@ -79,7 +80,9 @@ public class AmbulanceService extends Service {
 					Challenge challenge = read(socket);
 					log("Challenge received");
 
-					if (fakeMessage)
+					if (fakeCert)
+						send(socket, FakeAmbulance.createFakeCertificateResponse(challenge));
+					else if (fakeMessage)
 						send(socket, FakeAmbulance.createFakeMessageResponse(challenge));
 					else
 						send(socket, Ambulance.createResponse(challenge));
@@ -133,4 +136,11 @@ public class AmbulanceService extends Service {
 		return this.fakeMessage;
 	}
 
+	public void setUseFakeCert(boolean fake) {
+		this.fakeCert = fake;
+	}
+	
+	public boolean getUseFakeCert() {
+		return this.fakeCert;
+	}
 }
