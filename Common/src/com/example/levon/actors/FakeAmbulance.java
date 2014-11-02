@@ -5,7 +5,7 @@ import com.example.levon.utils.Response;
 import com.example.levon.utils.SignUtils;
 
 public class FakeAmbulance {
-	
+
 	//
 	// Private key, generated using:
 	//
@@ -14,39 +14,38 @@ public class FakeAmbulance {
 	// -nocrypt -out ambulance.pk8
 	//
 	private static final String PRIVATE_KEY = "-----BEGIN PRIVATE KEY-----\n"
-			+ "MIICdgIBADANBgkqhkiG9w0BAQEFAASCAmAwggJcAgEAAoGBAPnAeiAWbKhWh1oG\n"
-			+ "w38tXMTfJPEnVSQ11KmaQ0I9uhdQjfBGn+CfUJ59RjrBSLUU3HoJ6SizqYedQRvK\n"
-			+ "TG/VetXLbAgnDiO4r6ssUqJ6bXK4K2nuDS+swg34c4Up35NZWpC2SXpEGjIoixUV\n"
-			+ "pIgBkbfxGfifCKfcsW5IQM4auOZVAgMBAAECgYAY5m3GoTW4Gthny2DWXylun2jJ\n"
-			+ "ekhs0ckgF7c49XqGNIvSNthdxsR86LSFyxt6olfQ+wf5/N+cG7uQD71LMReL4s2l\n"
-			+ "Vj8lvTAdl+q5lLuMr5N/hTvwQokDdIpoX+TfTy6iljEtNyyKHrMPTPq6NvJKoSw8\n"
-			+ "uYvowkGCG0KBtpBMgQJBAP/z6oH+bt43kJ4Myff3mItzhKDxFPRCF93J4pqV9axi\n"
-			+ "gS/sqwkT/9+wIDeWVwQSn7ZH9L2Ulk9Q8Usew+s++OUCQQD5zESsBDAtiSfMFfzj\n"
-			+ "vQZ7YkjJ9RnrJgFTtq9mGZzj0p0qiN7jgaPba19vQRQCkerhdO2ilZgqylZn6alK\n"
-			+ "lpCxAkAOdkK+25h6F9ulAoX669ODtaA908FiV8Wvc3PJVkXOWrZ/9bhoR+gCRJpd\n"
-			+ "abI6+a5qh0BN4fJoQuOPYgqh5Sn9AkAylkNx8ocvMY91rR5BoI4nfofvHkvZayDp\n"
-			+ "qx1qN9Wl7YkWjBFXUXG1hdEV3sAGpTZD4kIdot3mDIPjF1bJXCSBAkEAxgxr6hBi\n"
-			+ "+2PVaRY+uDiClFYLRrI77MRb3mSzePGmzDCa/DYrnqxNHrjmrxlhBlwQWHB2a/Os\n"
-			+ "nhieSGFss/V3jA==\n" + "-----END PRIVATE KEY-----\n";
+			+ "MIICdQIBADANBgkqhkiG9w0BAQEFAASCAl8wggJbAgEAAoGBAMB5nKithBoYpnMU\n"
+			+ "7VjpYigaqgGoIKJeymOHF7D0ff5wIq19/qTvORm6qSsq+q9Hwdgy2HANBqGkGtkh\n"
+			+ "59LP0XjZE5g2AZNmPXMmbYveNnJtfaioJxbeiNULCMx8oBJI9lcFZxbLkxQe7KHy\n"
+			+ "FgW7NwNcYUiKmW/WYX1LoGnvYG/TAgMBAAECgYBSgw/so84Q3eZlSWBikFJa/OtK\n"
+			+ "oIe088vxlNVML9PfgrTrCStkC4XACOxCrD8hazKne0yb5ImmO9KiqM1X621RkZzk\n"
+			+ "nXIem5coUYv4Z8+2Ta4Fz2uXvJkeqOXr0DP9+idOHJiDiOnGvbiGqWkYp5nrF0Wr\n"
+			+ "ZIv7lyZPgYqOgEJHuQJBAOue7aYbUSU3RwVQBUCG0JIZzP0w9GkNO1fG6YricmuG\n"
+			+ "ei+HJCZgaIOQyYuxe8nU+NFAVU4jcYO6SHF5D66dZU8CQQDRH1ux9lmZ98kTfYea\n"
+			+ "H0n3/6P2ZUMtm++y1Tqumw+tIcoC1ia8AJXMJpnK2qWxB3r7rCgFCeWxLBbLEFOH\n"
+			+ "sPQ9AkBGSWyfJnr4XRsEjLBkZVMGokeyJ85hIB9Zue6lDZQQW1dLoka4Y/4JcUGO\n"
+			+ "OG2y8aMf2M8Zth0ArKs7nl99OVqlAkB4tXYTSlS8CAgb5PiR4P+sU/aLsjXNrNX2\n"
+			+ "Txh5Uu4AjKFzc7OWD2xoE9vv+LdtcRjvDpdnGShpVT6u5fShPWYtAkAl+nK7qLV/\n"
+			+ "ZRxC6oKlsFEyyeFeCXJ7GgE/FhC4a3iiFAbsjS8q5Io8PRxomnP1jNsUo288eyZM\n" + "NjuLKVmhqpQm\n"
+			+ "-----END PRIVATE KEY-----\n";
 
 	//
-	// Public certificate, signed by the trusted party, generated using:
+	// Public certificate, fake and self signed, generated using:
 	//
-	// $ openssl req -new -key ambulance.key -out ambulance.csr
-	// $ openssl x509 -req -days 30 -in ambulance.csr -signkey central.key -out
-	// ambulance.crt
+	// $ openssl req -new -key fake.key -out fake.csr
+	// $ openssl x509 -req -days 30 -in fake.csr -signkey fake.key -out fake.crt
 	//
 	public static final String PUBLIC_CERTIFICATE = "-----BEGIN CERTIFICATE-----\n"
-			+ "MIIBvzCCASgCCQCtvwsmvHwU+TANBgkqhkiG9w0BAQUFADAkMQswCQYDVQQGEwJT\n"
-			+ "RTEVMBMGA1UEAwwMc2FmZXpvbmUub3JnMB4XDTE0MTAyNzIxMjk1MVoXDTE0MTEy\n"
-			+ "NjIxMjk1MVowJDELMAkGA1UEBhMCU0UxFTATBgNVBAMMDHNhZmV6b25lLm9yZzCB\n"
-			+ "nzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEA73d57kU5eMZt91Sh/0gvZlafAY57\n"
-			+ "MHTMmkCGEahRbTTe8A/IrXDoDHA8N/fTkcr5ECSLYT4dFar1oDYm0qX5zFWScgGP\n"
-			+ "FrXS8PSJ2yzYAgTMeAySh4FBnIu4I1wRMi1WkLLx0S+KYvzfM6frQgDCpipVPyv5\n"
-			+ "pxxvr909R4KVlnECAwEAATANBgkqhkiG9w0BAQUFAAOBgQCFbjLT9lg9JpaqLy9r\n"
-			+ "RPdHymu8MXxZkwkNtSX0/HTwgDO22w2M0spcIAai84Qj6mzqnn17PBmkV3k0xlFQ\n"
-			+ "oKznB0X6yADYhDO8T9Iv/J5MtChXiNFyF98NeWoJ03ecOTGtF3R1HX785Q1fswn5\n"
-			+ "hk/2hCTPRCukorKjgrSwlXq1Xg==\n" + "-----END CERTIFICATE-----\n";
+			+ "MIIByTCCATICCQD1+0hZHDeW1DANBgkqhkiG9w0BAQUFADApMQswCQYDVQQGEwJT\n"
+			+ "RTEaMBgGA1UEAwwRZmFrZS5zYWZlem9uZS5vcmcwHhcNMTQxMTAyMTM0MDMzWhcN\n"
+			+ "MTQxMjAyMTM0MDMzWjApMQswCQYDVQQGEwJTRTEaMBgGA1UEAwwRZmFrZS5zYWZl\n"
+			+ "em9uZS5vcmcwgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBAMB5nKithBoYpnMU\n"
+			+ "7VjpYigaqgGoIKJeymOHF7D0ff5wIq19/qTvORm6qSsq+q9Hwdgy2HANBqGkGtkh\n"
+			+ "59LP0XjZE5g2AZNmPXMmbYveNnJtfaioJxbeiNULCMx8oBJI9lcFZxbLkxQe7KHy\n"
+			+ "FgW7NwNcYUiKmW/WYX1LoGnvYG/TAgMBAAEwDQYJKoZIhvcNAQEFBQADgYEAIN6W\n"
+			+ "a92hfWoaz6DPz2iTaCbMVxDlrOmbE+gZLASFUG9YydIPhLN6JcnxTvlNaA6J+zNX\n"
+			+ "EByY3F5G1hiTaTXyYbjziWRIuylNFIYIck2vqcKUHaij4xp5mA1YoRt3mkZ/eJBc\n"
+			+ "zmjYhl4TTHsET1KhZUAKq0q9tOn1b/KI5yjqghE=\n" + "-----END CERTIFICATE-----\n";
 
 	private static final String message = "Reg Nr: ABC 123\nDriver Name: Olle Sol\nOrganization: Red Cross";
 	private static final byte[] signature = SignUtils.sign(message, PRIVATE_KEY);

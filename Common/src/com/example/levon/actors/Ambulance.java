@@ -11,8 +11,7 @@ public class Ambulance {
 	//
 	// $ openssl genrsa -out ambulance.key 1024
 	// $ openssl pkcs8 -topk8 -inform pem -in ambulance.key -outform pem
-	// -nocrypt
-	// -out ambulance.pk8
+	// -nocrypt -out ambulance.pk8
 	//
 	private static final String PRIVATE_KEY = "-----BEGIN PRIVATE KEY-----\n"
 			+ "MIICdgIBADANBgkqhkiG9w0BAQEFAASCAmAwggJcAgEAAoGBAPnAeiAWbKhWh1oG\n"
