@@ -60,7 +60,8 @@
                     <TextView
                         android:id="@+id/driver_name"
                         style="@style/textstylebold"
-                        android:gravity="left" />
+                        android:gravity="left"          
+                		android:layout_marginBottom="6dp" />
                 </TableRow>
 
                 <TableRow>
@@ -99,7 +100,8 @@
             <TextView
                 android:id="@+id/organization"
                 style="@style/textstylebold"
-                android:gravity="left" />
+                android:gravity="left"  
+                android:layout_marginBottom="6dp" />
         </TableRow>
 
         <TableRow>
@@ -141,7 +143,8 @@
 
         <TableRow>
 
-            <TextView
+            <TextView                
+                style="@style/infotextstyle"
                 android:id="@+id/checkpoint_log"
                 android:layout_width="wrap_content"
                 android:layout_weight="2"
