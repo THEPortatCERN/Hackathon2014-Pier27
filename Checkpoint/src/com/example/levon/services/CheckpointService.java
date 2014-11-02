@@ -40,7 +40,7 @@ public class CheckpointService extends Service {
 		if (adapter == null)
 			log("ERROR: no bluetooth adapter found");
 		else if (adapter.startDiscovery()) {
-			log("discovering...");
+			log("Discovering...");
 
 			// Create a BroadcastReceiver for ACTION_FOUND
 			receiver = new BroadcastReceiver() {

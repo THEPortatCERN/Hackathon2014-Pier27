@@ -1,24 +1,17 @@
 package com.example.levon.ui;
 
-import android.app.ActionBar.LayoutParams;
 import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.PopupWindow;
 import android.widget.TextView;
 
-import com.example.levon.MainActivity;
 import com.example.levon.R;
 import com.example.levon.services.AmbulanceDelegate;
 import com.example.levon.services.AmbulanceService;
@@ -32,6 +25,7 @@ public class AmbulanceActivity extends Activity {
 	Button openPopUp;
 	AmbulanceService  ambulance;
 	TextView logTxt;
+	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +45,8 @@ public class AmbulanceActivity extends Activity {
 		 infoText.setText(ambulanceInfo.getOrganization());
 		 infoText = (TextView) findViewById(R.id.signed_by);
 		 infoText.setText(ambulanceInfo.getSignedBy());
+		 ImageView scanningImage = (ImageView) findViewById(R.id.scanning_image);
+		 scanningImage.setBackgroundResource(R.anim.scanning);
 		
 	}
 	
@@ -59,10 +55,7 @@ public class AmbulanceActivity extends Activity {
 	    // TODO Auto-generated method stub
 	    super.onWindowFocusChanged(hasFocus);
 	    if (hasFocus) {
-			 
 			ImageView scanningImage = (ImageView) findViewById(R.id.scanning_image);
-			 scanningImage.setBackgroundResource(R.anim.scanning);
-
 			 AnimationDrawable scanningAnimation = (AnimationDrawable) scanningImage.getBackground();
 			 scanningAnimation.start();
 	    }
@@ -83,7 +76,15 @@ public class AmbulanceActivity extends Activity {
 			 ImageView scanningImage = (ImageView) findViewById(R.id.scanning_image);
 			 AnimationDrawable scanningAnimation = (AnimationDrawable) scanningImage.getBackground();
 			 scanningAnimation.stop();
-			 scanningImage.setBackgroundResource(R.drawable.pic_yes_400ok);
+			 scanningImage.setVisibility(View.GONE);
+			 ImageView resultImage = (ImageView) findViewById(R.id.result_image);
+			 if(ambulance.getUseFakeMessage()) {
+				 resultImage.setImageResource(R.drawable.pic_no_400ok);
+			 }
+			 else {
+				 resultImage.setImageResource(R.drawable.pic_yes_400ok);
+			 }
+			 resultImage.setVisibility(View.VISIBLE);
 		}		
 	};
     

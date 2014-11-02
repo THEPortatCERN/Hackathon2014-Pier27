@@ -28,10 +28,6 @@
             android:name="com.example.levon.ui.AmbulanceActivity"
             android:label="@string/title_activity_ambulance">
         </activity>
-        <activity
-           android:name="com.example.levon.ui.CheckpointActivity"
-            android:label="@string/title_activity_checkpoint">
-        </activity>
     </application>
 
 </manifest>

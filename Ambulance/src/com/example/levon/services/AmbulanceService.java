@@ -128,5 +128,9 @@ public class AmbulanceService extends Service {
 	public void setUseFakeMessage(boolean fake) {
 		this.fakeMessage = fake;
 	}
+	
+	public boolean getUseFakeMessage() {
+		return this.fakeMessage;
+	}
 
 }

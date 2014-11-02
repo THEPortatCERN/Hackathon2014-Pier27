@@ -1,17 +1,14 @@
 package com.example.levon.ui;
 
 import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TableLayout;
 import android.widget.TextView;
 
-import com.example.levon.MainActivity;
 import com.example.levon.R;
 import com.example.levon.services.CheckpointDelegate;
 import com.example.levon.services.CheckpointService;
@@ -59,12 +56,24 @@ public class CheckpointActivity extends Activity {
 	private CheckpointDelegate checkpointDelegate = new CheckpointDelegate() {
 		@Override
 		public void onAmbulanceDiscovered(boolean authentic, String message) {
+			//Access the tables containing the ambulance details
+			 TableLayout ambulanceDetailsOne = (TableLayout) findViewById(R.id.ambulance_details_one);
+			 TableLayout ambulanceDetailsTwo = (TableLayout) findViewById(R.id.ambulance_details_two);
+			 ImageView resultImage = (ImageView) findViewById(R.id.result_image);
 			//If it is an authentic ambulance, show the info
 			if(authentic) {
+				//Make the tables visible
+				ambulanceDetailsOne.setVisibility(View.VISIBLE);
+				ambulanceDetailsTwo.setVisibility(View.VISIBLE);
+				 //Change the image to a green check mark
 				 ImageView scanningImage = (ImageView) findViewById(R.id.scanning_image);
 				 AnimationDrawable scanningAnimation = (AnimationDrawable) scanningImage.getBackground();
 				 scanningAnimation.stop();
+				 scanningImage.setVisibility(View.GONE);
+			     resultImage.setImageResource(R.drawable.pic_yes_400ok);
+				 resultImage.setVisibility(View.VISIBLE);
 				 scanningImage.setBackgroundResource(R.drawable.pic_yes_400ok);
+				 //Then fill in the details of the ambulance
 				 AmbulanceInfo ambulance = getAmbulanceInfoFromString(message);
 				 TextView ambulanceTxt = (TextView) findViewById(R.id.driver_name);
 				 ambulanceTxt.setText(ambulance.getDriverName());
@@ -76,10 +85,16 @@ public class CheckpointActivity extends Activity {
 				 ambulanceTxt.setText(ambulance.getSignedBy());
 			}
 			else {
+				//Make the tables invisible
+				ambulanceDetailsOne.setVisibility(View.INVISIBLE);
+				ambulanceDetailsTwo.setVisibility(View.INVISIBLE);
+				 //Change the image to a failed cross mark
 				 ImageView scanningImage = (ImageView) findViewById(R.id.scanning_image);
 				 AnimationDrawable scanningAnimation = (AnimationDrawable) scanningImage.getBackground();
 				 scanningAnimation.stop();
-				 scanningImage.setBackgroundResource(R.drawable.pic_no_400ok);
+				 scanningImage.setVisibility(View.GONE);
+				 resultImage.setImageResource(R.drawable.pic_no_400ok);
+				 resultImage.setVisibility(View.VISIBLE);
 			}
 		}		
 	};
