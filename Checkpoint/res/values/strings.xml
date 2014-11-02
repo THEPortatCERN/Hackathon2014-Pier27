@@ -16,5 +16,5 @@
 	<string name="license_plate">LICENSE PLATE</string>
 	<string name="organization">ORGANIZATION</string>
 	<string name="signed_by">CERTIFIED BY</string>
-	<string name="fake_message">CERTIFICATE EXPIRED 12/03/2013</string>
+	<string name="fake_message">VERIFICATION FAILED</string>
 </resources>
