@@ -15,8 +15,8 @@
     <string name="fake">Fake</string>
     <string name="info">Info</string>
 	<string name="close">Close</string>
-	<string name="driver_name">Driver Name:</string>
-	<string name="license_plate">License Plate:</string>
-	<string name="organization">Organization:</string>
-	<string name="signed_by">Signed By:</string>
+	<string name="driver_name">NAME</string>
+	<string name="license_plate">LICENSE PLATE</string>
+	<string name="organization">ORGANIZATION</string>
+	<string name="signed_by">CERTIFIED BY</string>
 </resources>

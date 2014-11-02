@@ -3,19 +3,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:alignmentMode="alignBounds"
+    android:background="@color/background"
     android:columnCount="1"
     android:columnOrderPreserved="false"
     android:rowCount="4"
-    android:useDefaultMargins="true"
-    android:background="@color/background">
-	<ImageView
-	    android:id="@+id/scanning_image"
-        android:layout_row="0"
+    android:useDefaultMargins="true" >
+
+    <ImageView
+        android:id="@+id/scanning_image"
         android:layout_width="202dp"
         android:layout_height="178dp"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center"
+        android:layout_row="0" />
 
     <TableLayout
+        android:layout_height="wrap_content"
         android:layout_marginLeft="40dp"
         android:layout_row="1" >
 
@@ -30,33 +32,39 @@
                 android:src="@drawable/gaia" />
 
             <TableLayout
-                android:layout_width="160dp"
+                android:layout_width="120dp"
                 android:layout_height="112dp"
                 android:layout_gravity="center_vertical|right" >
 
                 <TableRow>
+
+                    <TextView
+                        style="@style/textstyle"
+                        android:text="@string/driver_name" />
+                </TableRow>
+
+                <TableRow>
+
                     <TextView
                         android:id="@+id/driver_name"
-                        android:gravity="left"
-                        android:padding="3dip" />
+                        style="@style/textstylebold"
+                        android:gravity="left" />
                 </TableRow>
 
                 <TableRow>
+
                     <TextView
-                        android:id="@+id/organization"
-                        android:gravity="left"
-                        android:maxLines="5"
-                        android:padding="3dip" />
-                </TableRow>
-                <TableRow>
-                   <CheckBox
-		            android:id="@+id/check_fake_ambulance_msg"
-		            android:layout_width="wrap_content"
-		            android:layout_height="wrap_content"
-		            android:checked="false"
-		            android:text="@string/fake" />
+                        style="@style/textstyle"
+                        android:text="@string/license_plate" />
                 </TableRow>
 
+                <TableRow>
+
+                    <TextView
+                        android:id="@+id/license_plate"
+                        style="@style/textstylebold"
+                        android:gravity="left" />
+                </TableRow>
             </TableLayout>
         </TableRow>
     </TableLayout>
@@ -68,31 +76,54 @@
         <TableRow>
 
             <TextView
-                android:padding="3dip"
-                android:text="@string/license_plate"
-                 />
-
-            <TextView
-                android:id="@+id/license_plate"
-                android:gravity="left"
-                android:padding="3dip" />
+                style="@style/textstyle"
+                android:text="@string/organization" />
         </TableRow>
 
         <TableRow>
 
             <TextView
-                android:padding="3dip"
+                android:id="@+id/organization"
+                style="@style/textstylebold"
+                android:gravity="left" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                style="@style/textstyle"
                 android:text="@string/signed_by" />
+        </TableRow>
+
+        <TableRow>
 
             <TextView
                 android:id="@+id/signed_by"
-                android:gravity="left"
-                android:padding="3dip" />
+                style="@style/textstylebold"
+                android:gravity="left" />
         </TableRow>
-
     </TableLayout>
 
-    <TableLayout android:layout_row="2" >
+    <!--
+    TableLayout
+        android:layout_gravity="top"
+        android:layout_row="3" >
+                <TableRow>
+            <ImageButton
+                android:id="@+id/btn_back_ambulance"
+                android:layout_gravity="right"
+                android:layout_weight="1"
+                android:text="@string/btn_back"
+                android:background="@null"
+                android:src="@drawable/ic_action_back"
+                android:width="60dip"
+                android:layout_column="3"/>
+                </TableRow>
+
+    </TableLayout
+    -->
+
+    <TableLayout android:layout_row="3" >
 
         <TableRow>
 
@@ -101,13 +132,12 @@
                 android:layout_width="wrap_content"
                 android:layout_weight="2" />
 
-            <ImageButton
-                android:id="@+id/btn_back_ambulance"
-                android:layout_gravity="right"
-                android:layout_weight="1"
-                android:background="@null"
-                android:src="@drawable/ic_action_back"
-                android:width="60dip" />
+            <CheckBox
+                android:id="@+id/check_fake_ambulance_msg"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:checked="false"
+                android:text="@string/fake" />
         </TableRow>
     </TableLayout>
 

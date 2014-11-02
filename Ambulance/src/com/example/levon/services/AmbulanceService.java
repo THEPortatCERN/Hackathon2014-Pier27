@@ -91,6 +91,7 @@ public class AmbulanceService extends Service {
 							delegate.onResponseSent(true);
 						}
 					});
+					socket.close();
 				}
 			} catch (IOException e) {
 				log("IOException: " + e.getMessage());

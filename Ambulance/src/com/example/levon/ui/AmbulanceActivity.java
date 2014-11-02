@@ -39,7 +39,7 @@ public class AmbulanceActivity extends Activity {
 		setContentView(R.layout.activity_ambulance);
 		ambulance = new AmbulanceService(this, logDelegate, ambulanceDelegate);
 		ambulance.start();
-		addBackButtonListener();
+		//addBackButtonListener();
 		addFakeMsgCheckBoxListener();
 		 TextView infoText = (TextView) findViewById(R.id.driver_name);
 		 AmbulanceInfo ambulanceInfo = getAmbulanceInfoFromString(ambulance.getMessage());
@@ -123,7 +123,7 @@ public class AmbulanceActivity extends Activity {
 	 
 		}
 	*/
-    public void addBackButtonListener() {
+  /*  public void addBackButtonListener() {
       	 
 		final Context context = this;
 		backBtn = (ImageButton) findViewById(R.id.btn_back_ambulance);
@@ -139,7 +139,7 @@ public class AmbulanceActivity extends Activity {
 			}
 		});
  
-	}
+	}*/
 	@Override
 	protected void onDestroy(){
 		super.onDestroy();
