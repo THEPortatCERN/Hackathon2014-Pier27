@@ -147,8 +147,8 @@
                 style="@style/infotextstyle"
                 android:id="@+id/checkpoint_log"
                 android:layout_width="wrap_content"
-                android:layout_weight="2"
-                android:maxLines="2"/>
+                android:maxLines="2"
+                android:layout_marginTop="0dp"/>
 
         </TableRow>
     </TableLayout>

@@ -140,19 +140,18 @@
             <CheckBox
                 android:id="@+id/check_fake_ambulance_msg"
                 android:layout_height="20dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="4dp"
               	android:checked="false"
                 android:text="@string/fake"
                 style="@style/infotextstyle"
-                android:button="@drawable/customdrawable"
-               
-                 />
+                android:button="@drawable/customdrawable" />
 		</TableRow>
 		
 		<TableRow>
             <TextView
                 style="@style/infotextstyle"
                 android:id="@+id/ambulance_log"
+                android:layout_marginTop="0dp"
                 android:maxLines="2"/>
          </TableRow>
                
