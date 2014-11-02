@@ -1,0 +1,59 @@
+Certificate:
+    Data:
+        Version: 3 (0x2)
+        Serial Number: 1 (0x1)
+    Signature Algorithm: sha1WithRSAEncryption
+        Issuer: C=SE, CN=safezone.org
+        Validity
+            Not Before: Nov  2 12:12:49 2014 GMT
+            Not After : Nov  2 12:12:49 2015 GMT
+        Subject: C=SE, CN=safezone.org
+        Subject Public Key Info:
+            Public Key Algorithm: rsaEncryption
+                Public-Key: (1024 bit)
+                Modulus:
+                    00:f9:c0:7a:20:16:6c:a8:56:87:5a:06:c3:7f:2d:
+                    5c:c4:df:24:f1:27:55:24:35:d4:a9:9a:43:42:3d:
+                    ba:17:50:8d:f0:46:9f:e0:9f:50:9e:7d:46:3a:c1:
+                    48:b5:14:dc:7a:09:e9:28:b3:a9:87:9d:41:1b:ca:
+                    4c:6f:d5:7a:d5:cb:6c:08:27:0e:23:b8:af:ab:2c:
+                    52:a2:7a:6d:72:b8:2b:69:ee:0d:2f:ac:c2:0d:f8:
+                    73:85:29:df:93:59:5a:90:b6:49:7a:44:1a:32:28:
+                    8b:15:15:a4:88:01:91:b7:f1:19:f8:9f:08:a7:dc:
+                    b1:6e:48:40:ce:1a:b8:e6:55
+                Exponent: 65537 (0x10001)
+        X509v3 extensions:
+            X509v3 Basic Constraints: 
+                CA:FALSE
+            Netscape Comment: 
+                OpenSSL Generated Certificate
+            X509v3 Subject Key Identifier: 
+                DE:08:2D:22:14:D0:5E:17:50:C7:F5:13:B6:A5:E9:1B:10:D7:4B:40
+            X509v3 Authority Key Identifier: 
+                DirName:/C=SE/CN=safezone.org
+                serial:FF:F8:A6:FE:2F:9D:EE:95
+
+    Signature Algorithm: sha1WithRSAEncryption
+         21:9b:9e:e8:18:54:2e:ed:ef:b5:66:2a:ac:0f:3b:e6:5d:52:
+         9a:32:d1:95:81:df:68:45:8a:bf:1a:6d:b8:70:b1:96:89:93:
+         93:52:90:1a:4a:11:02:f9:b8:b7:ab:f7:68:ff:fc:ba:9e:05:
+         82:d5:c3:46:e4:af:06:7b:63:cb:52:66:c7:3d:93:bb:38:c1:
+         38:c1:f5:bf:07:c4:5b:d9:ee:0a:1c:00:72:06:5f:20:3a:8b:
+         79:84:f0:51:5f:af:b9:a0:55:32:0a:79:63:a4:f1:4b:47:62:
+         6d:ea:fe:86:bb:96:4c:b7:68:2b:7b:f5:d0:4c:0f:20:c3:0a:
+         10:a1
+-----BEGIN CERTIFICATE-----
+MIICWjCCAcOgAwIBAgIBATANBgkqhkiG9w0BAQUFADAkMQswCQYDVQQGEwJTRTEV
+MBMGA1UEAwwMc2FmZXpvbmUub3JnMB4XDTE0MTEwMjEyMTI0OVoXDTE1MTEwMjEy
+MTI0OVowJDELMAkGA1UEBhMCU0UxFTATBgNVBAMMDHNhZmV6b25lLm9yZzCBnzAN
+BgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEA+cB6IBZsqFaHWgbDfy1cxN8k8SdVJDXU
+qZpDQj26F1CN8Eaf4J9Qnn1GOsFItRTcegnpKLOph51BG8pMb9V61ctsCCcOI7iv
+qyxSonptcrgrae4NL6zCDfhzhSnfk1lakLZJekQaMiiLFRWkiAGRt/EZ+J8Ip9yx
+bkhAzhq45lUCAwEAAaOBmzCBmDAJBgNVHRMEAjAAMCwGCWCGSAGG+EIBDQQfFh1P
+cGVuU1NMIEdlbmVyYXRlZCBDZXJ0aWZpY2F0ZTAdBgNVHQ4EFgQU3ggtIhTQXhdQ
+x/UTtqXpGxDXS0AwPgYDVR0jBDcwNaEopCYwJDELMAkGA1UEBhMCU0UxFTATBgNV
+BAMMDHNhZmV6b25lLm9yZ4IJAP/4pv4vne6VMA0GCSqGSIb3DQEBBQUAA4GBACGb
+nugYVC7t77VmKqwPO+ZdUpoy0ZWB32hFir8abbhwsZaJk5NSkBpKEQL5uLer92j/
+/LqeBYLVw0bkrwZ7Y8tSZsc9k7s4wTjB9b8HxFvZ7gocAHIGXyA6i3mE8FFfr7mg
+VTIKeWOk8UtHYm3q/oa7lky3aCt79dBMDyDDChCh
+-----END CERTIFICATE-----

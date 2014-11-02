@@ -58,4 +58,12 @@ public class FakeAmbulance {
 		Response r = Ambulance.createResponse(challenge);
 		return new Response(r.getChallengeSignature(), message, r.getSignature(), r.getCertificate());
 	}
+
+	//
+	// Sign using a fake certificate
+	//
+	public static Response createFakeCertificateResponse(Challenge challenge) {
+		byte[] challengeSignature = SignUtils.sign(challenge.getRandomString(), PRIVATE_KEY);
+		return new Response(challengeSignature, message, signature, PUBLIC_CERTIFICATE);
+	}
 }

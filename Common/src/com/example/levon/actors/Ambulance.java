@@ -45,28 +45,30 @@ public class Ambulance {
 	// Public certificate, signed by the trusted party, generated using:
 	//
 	// $ openssl req -new -key ambulance.key -out ambulance.csr
-	// $ openssl x509 -req -days 30 -in ambulance.csr -signkey central.key -out
-	// ambulance.crt
+	// $ openssl ca -cert central.crt -keyfile central.key -in ambulance.csr
+	// -out ambulance.crt
 	//
 	public static final String PUBLIC_CERTIFICATE = "-----BEGIN CERTIFICATE-----\n"
-			+ "MIIBvzCCASgCCQCtvwsmvHwU+TANBgkqhkiG9w0BAQUFADAkMQswCQYDVQQGEwJT\n"
-			+ "RTEVMBMGA1UEAwwMc2FmZXpvbmUub3JnMB4XDTE0MTAyNzIxMjk1MVoXDTE0MTEy\n"
-			+ "NjIxMjk1MVowJDELMAkGA1UEBhMCU0UxFTATBgNVBAMMDHNhZmV6b25lLm9yZzCB\n"
-			+ "nzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEA73d57kU5eMZt91Sh/0gvZlafAY57\n"
-			+ "MHTMmkCGEahRbTTe8A/IrXDoDHA8N/fTkcr5ECSLYT4dFar1oDYm0qX5zFWScgGP\n"
-			+ "FrXS8PSJ2yzYAgTMeAySh4FBnIu4I1wRMi1WkLLx0S+KYvzfM6frQgDCpipVPyv5\n"
-			+ "pxxvr909R4KVlnECAwEAATANBgkqhkiG9w0BAQUFAAOBgQCFbjLT9lg9JpaqLy9r\n"
-			+ "RPdHymu8MXxZkwkNtSX0/HTwgDO22w2M0spcIAai84Qj6mzqnn17PBmkV3k0xlFQ\n"
-			+ "oKznB0X6yADYhDO8T9Iv/J5MtChXiNFyF98NeWoJ03ecOTGtF3R1HX785Q1fswn5\n" + "hk/2hCTPRCukorKjgrSwlXq1Xg==\n"
-			+ "-----END CERTIFICATE-----\n";
+			+ "MIICWjCCAcOgAwIBAgIBATANBgkqhkiG9w0BAQUFADAkMQswCQYDVQQGEwJTRTEV\n"
+			+ "MBMGA1UEAwwMc2FmZXpvbmUub3JnMB4XDTE0MTEwMjEyMTI0OVoXDTE1MTEwMjEy\n"
+			+ "MTI0OVowJDELMAkGA1UEBhMCU0UxFTATBgNVBAMMDHNhZmV6b25lLm9yZzCBnzAN\n"
+			+ "BgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEA+cB6IBZsqFaHWgbDfy1cxN8k8SdVJDXU\n"
+			+ "qZpDQj26F1CN8Eaf4J9Qnn1GOsFItRTcegnpKLOph51BG8pMb9V61ctsCCcOI7iv\n"
+			+ "qyxSonptcrgrae4NL6zCDfhzhSnfk1lakLZJekQaMiiLFRWkiAGRt/EZ+J8Ip9yx\n"
+			+ "bkhAzhq45lUCAwEAAaOBmzCBmDAJBgNVHRMEAjAAMCwGCWCGSAGG+EIBDQQfFh1P\n"
+			+ "cGVuU1NMIEdlbmVyYXRlZCBDZXJ0aWZpY2F0ZTAdBgNVHQ4EFgQU3ggtIhTQXhdQ\n"
+			+ "x/UTtqXpGxDXS0AwPgYDVR0jBDcwNaEopCYwJDELMAkGA1UEBhMCU0UxFTATBgNV\n"
+			+ "BAMMDHNhZmV6b25lLm9yZ4IJAP/4pv4vne6VMA0GCSqGSIb3DQEBBQUAA4GBACGb\n"
+			+ "nugYVC7t77VmKqwPO+ZdUpoy0ZWB32hFir8abbhwsZaJk5NSkBpKEQL5uLer92j/\n"
+			+ "/LqeBYLVw0bkrwZ7Y8tSZsc9k7s4wTjB9b8HxFvZ7gocAHIGXyA6i3mE8FFfr7mg\n"
+			+ "VTIKeWOk8UtHYm3q/oa7lky3aCt79dBMDyDDChCh\n" + "-----END CERTIFICATE-----\n";
 
 	private static final String message = "Marc Robinson\n 475 REV\nEmergency Services Madagascar\n nostrike.org\n";
 	private static final byte[] signature = SignUtils.sign(message, PRIVATE_KEY);
 
 	public static Response createResponse(Challenge challenge) {
 		byte[] challengeSignature = SignUtils.sign(challenge.getRandomString(), PRIVATE_KEY);
-		// TODO: should return PUBLIC_CErtIFICATe instead of PUBLIC_KEY, but cannot get verification to work with a certificate
-		return new Response(challengeSignature, message, signature, PUBLIC_KEY);
+		return new Response(challengeSignature, message, signature, PUBLIC_CERTIFICATE);
 	}
 
 	public static String getMessage() {
