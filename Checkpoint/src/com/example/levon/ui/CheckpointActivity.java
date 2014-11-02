@@ -83,6 +83,8 @@ public class CheckpointActivity extends Activity {
 				 ambulanceTxt.setText(ambulance.getOrganization());
 				 ambulanceTxt = (TextView) findViewById(R.id.signed_by);
 				 ambulanceTxt.setText(ambulance.getSignedBy());
+				 TextView invalidText = (TextView) findViewById(R.id.fake_message);
+				 invalidText.setVisibility(View.GONE);
 			}
 			else {
 				//Make the tables invisible
@@ -95,6 +97,8 @@ public class CheckpointActivity extends Activity {
 				 scanningImage.setVisibility(View.GONE);
 				 resultImage.setImageResource(R.drawable.pic_no_400ok);
 				 resultImage.setVisibility(View.VISIBLE);
+				 TextView invalidText = (TextView) findViewById(R.id.fake_message);
+				 invalidText.setVisibility(View.VISIBLE);
 			}
 		}		
 	};

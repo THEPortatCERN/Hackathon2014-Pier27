@@ -4,34 +4,61 @@
     android:id="@+id/checkpointlayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:alignmentMode="alignBounds"
-    android:background="@color/background"
     android:columnCount="1"
     android:columnOrderPreserved="false"
     android:rowCount="4"
     android:useDefaultMargins="true"
     tools:context="com.example.levon.ui.CheckpointActivity" >
 
-    <ImageView
-        android:id="@+id/scanning_image"
-        android:layout_width="202dp"
-        android:layout_height="178dp"
-        android:layout_gravity="center"
-        android:layout_row="0" />
-    <ImageView
-        android:id="@+id/result_image"
-        android:layout_width="202dp"
-        android:layout_height="178dp"
-        android:layout_gravity="center"
-        android:layout_row="0"
-        android:visibility="gone"/>
+    <FrameLayout
+        android:id="@+id/image_overlay"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_gravity="left"
+        android:layout_marginBottom="3dp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="5dp"
+        android:layout_row="0" >
+
+        <ImageView
+            android:id="@+id/background_img"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:src="@drawable/pic_whitecircle_400x400" />
+
+        <ImageView
+            android:id="@+id/scanning_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center" />
+
+        <ImageView
+            android:id="@+id/result_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:visibility="gone" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/fake_message"
+        style="@style/textstylebold"
+        android:layout_marginBottom="6dp"
+        android:gravity="left"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="20dp"
+        android:layout_row="1"
+        android:text="@string/fake_message"
+        android:visibility="gone" />
 
     <TableLayout
         android:id="@+id/ambulance_details_one"
         android:layout_height="wrap_content"
         android:layout_marginLeft="40dp"
         android:layout_row="1"
-        android:visibility="invisible">
+        android:visibility="invisible" >
 
         <TableRow>
 
@@ -60,8 +87,8 @@
                     <TextView
                         android:id="@+id/driver_name"
                         style="@style/textstylebold"
-                        android:gravity="left"          
-                		android:layout_marginBottom="6dp" />
+                        android:layout_marginBottom="6dp"
+                        android:gravity="left" />
                 </TableRow>
 
                 <TableRow>
@@ -85,8 +112,9 @@
     <TableLayout
         android:id="@+id/ambulance_details_two"
         android:layout_gravity="top"
+        android:layout_marginLeft="40dp"
         android:layout_row="2"
-        android:visibility="invisible">
+        android:visibility="invisible" >
 
         <TableRow>
 
@@ -100,8 +128,8 @@
             <TextView
                 android:id="@+id/organization"
                 style="@style/textstylebold"
-                android:gravity="left"  
-                android:layout_marginBottom="6dp" />
+                android:layout_marginBottom="6dp"
+                android:gravity="left" />
         </TableRow>
 
         <TableRow>
@@ -139,17 +167,18 @@
     </TableLayout
     -->
 
-    <TableLayout android:layout_row="3" >
+    <TableLayout
+        android:layout_marginLeft="40dp"
+        android:layout_row="3" >
 
         <TableRow>
 
-            <TextView                
-                style="@style/infotextstyle"
+            <TextView
                 android:id="@+id/checkpoint_log"
+                style="@style/infotextstyle"
                 android:layout_width="wrap_content"
-                android:maxLines="2"
-                android:layout_marginTop="0dp"/>
-
+                android:layout_marginTop="0dp"
+                android:maxLines="2" />
         </TableRow>
     </TableLayout>
 
