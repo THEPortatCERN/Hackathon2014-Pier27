@@ -6,4 +6,12 @@
         <item name="android:background">#33B5E5</item>
         <item name="android:layout_marginTop">30dp</item>
     </style>
+    <style name="textstylebold" parent="@android:Theme.Holo">
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="textstyle" parent="@android:Theme.Holo">
+        <item name="android:fontFamily">sans-serif-condensed</item>
+        <item name="android:textStyle">normal</item>
+    </style>
 </resources>

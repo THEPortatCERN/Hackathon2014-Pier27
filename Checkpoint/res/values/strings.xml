@@ -13,4 +13,8 @@
     <string name="fake_certificate">Fake Certificate</string>
     <string name="info">Info</string>
 	<string name="close">Close</string>
+	<string name="driver_name">NAME</string>
+	<string name="license_plate">LICENSE PLATE</string>
+	<string name="organization">ORGANIZATION</string>
+	<string name="signed_by">CERTIFIED BY</string>
 </resources>

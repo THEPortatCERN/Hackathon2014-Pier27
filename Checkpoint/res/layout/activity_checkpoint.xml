@@ -1,47 +1,138 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/checkpointlayout"
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:orientation="vertical"
-    android:gravity="center"
-    tools:context="com.example.levon.ui.CheckpointActivity"
-    android:background="@color/background">
-     <ImageView
-      android:id="@+id/scanning_image"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"/>
-    <TextView android:id="@+id/checkpoint_log"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-    <TextView android:id="@+id/ambulance_detected"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-    <TextView
-          android:id="@+id/driver_name"
-          android:layout_width="fill_parent"
-          android:layout_height="wrap_content" />
-      <TextView
-          android:id="@+id/license_plate"
-          android:layout_width="fill_parent"
-          android:layout_height="wrap_content" />
-      <TextView
-          android:id="@+id/organization"
-          android:layout_width="fill_parent"
-          android:layout_height="wrap_content" />
-      <TextView
-          android:id="@+id/signed_by"
-          android:layout_width="fill_parent"
-          android:layout_height="wrap_content" />
-    <Button
-        android:id="@+id/btn_back_checkpoint"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="@string/btn_back" />
+    android:alignmentMode="alignBounds"
+    android:background="@color/background"
+    android:columnCount="1"
+    android:columnOrderPreserved="false"
+    android:rowCount="4"
+    android:useDefaultMargins="true" >
 
-</LinearLayout>
+    <ImageView
+        android:id="@+id/scanning_image"
+        android:layout_width="202dp"
+        android:layout_height="178dp"
+        android:layout_gravity="center"
+        android:layout_row="0" />
+
+    <TableLayout
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:layout_row="1" >
+
+        <TableRow>
+
+            <ImageView
+                android:id="@+id/imageViewProfile"
+                android:layout_width="90dp"
+                android:layout_height="120dp"
+                android:layout_gravity="right"
+                android:layout_weight="0"
+                android:src="@drawable/gaia" />
+
+            <TableLayout
+                android:layout_width="120dp"
+                android:layout_height="112dp"
+                android:layout_gravity="center_vertical|right" >
+
+                <TableRow>
+
+                    <TextView
+                        style="@style/textstyle"
+                        android:text="@string/driver_name" />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:id="@+id/driver_name"
+                        style="@style/textstylebold"
+                        android:gravity="left" />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        style="@style/textstyle"
+                        android:text="@string/license_plate" />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:id="@+id/license_plate"
+                        style="@style/textstylebold"
+                        android:gravity="left" />
+                </TableRow>
+            </TableLayout>
+        </TableRow>
+    </TableLayout>
+
+    <TableLayout
+        android:layout_gravity="top"
+        android:layout_row="2" >
+
+        <TableRow>
+
+            <TextView
+                style="@style/textstyle"
+                android:text="@string/organization" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/organization"
+                style="@style/textstylebold"
+                android:gravity="left" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                style="@style/textstyle"
+                android:text="@string/signed_by" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/signed_by"
+                style="@style/textstylebold"
+                android:gravity="left" />
+        </TableRow>
+    </TableLayout>
+
+    <!--
+    TableLayout
+        android:layout_gravity="top"
+        android:layout_row="3" >
+                <TableRow>
+            <ImageButton
+                android:id="@+id/btn_back_ambulance"
+                android:layout_gravity="right"
+                android:layout_weight="1"
+                android:text="@string/btn_back"
+                android:background="@null"
+                android:src="@drawable/ic_action_back"
+                android:width="60dip"
+                android:layout_column="3"/>
+                </TableRow>
+
+    </TableLayout
+    -->
+
+    <TableLayout android:layout_row="3" >
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/checkpoint_log"
+                android:layout_width="wrap_content"
+                android:layout_weight="2" />
+
+        </TableRow>
+    </TableLayout>
+
+</GridLayout>

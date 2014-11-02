@@ -29,7 +29,7 @@ public class CheckpointActivity extends Activity {
 		setContentView(R.layout.activity_checkpoint);
 		checkpoint = new CheckpointService(this, logDelegate, checkpointDelegate);
 		checkpoint.start();
-		addBackButtonListener();
+		//addBackButtonListener();
 	//	ImageView scanningImage = (ImageView) findViewById(R.id.scanning_image);
 	  //  scanningImage.setBackgroundResource(R.drawable.pic_no_400ok);
 
@@ -59,10 +59,6 @@ public class CheckpointActivity extends Activity {
 	private CheckpointDelegate checkpointDelegate = new CheckpointDelegate() {
 		@Override
 		public void onAmbulanceDiscovered(boolean authentic, String message) {
-			//The 'authentic' field will control which image to show - green button or red button
-			String authenticStr = (authentic) ? "Real ambulance" : "Fake ambulance";
-			TextView ambulanceTxt = (TextView) findViewById(R.id.ambulance_detected);
-			ambulanceTxt.setText(authenticStr);
 			//If it is an authentic ambulance, show the info
 			if(authentic) {
 				 ImageView scanningImage = (ImageView) findViewById(R.id.scanning_image);
@@ -70,7 +66,7 @@ public class CheckpointActivity extends Activity {
 				 scanningAnimation.stop();
 				 scanningImage.setBackgroundResource(R.drawable.pic_yes_400ok);
 				 AmbulanceInfo ambulance = getAmbulanceInfoFromString(message);
-				 ambulanceTxt = (TextView) findViewById(R.id.driver_name);
+				 TextView ambulanceTxt = (TextView) findViewById(R.id.driver_name);
 				 ambulanceTxt.setText(ambulance.getDriverName());
 				 ambulanceTxt = (TextView) findViewById(R.id.license_plate);
 				 ambulanceTxt.setText(ambulance.getLicensePlate());
@@ -97,7 +93,8 @@ public class CheckpointActivity extends Activity {
 		ambulanceInfo.setSignedBy(split[3]);
 		return ambulanceInfo;
 	}
-	
+
+	/*
     public void addBackButtonListener() {
      	 
 		final Context context = this;
@@ -115,6 +112,7 @@ public class CheckpointActivity extends Activity {
 		});
  
 	}
+	*/
 	@Override
 	protected void onDestroy(){
 		super.onDestroy();
